@@ -39,15 +39,6 @@
 </template>
 
 <script> 
-// import freshpartner from "../assets/freshpartners.png"
-
-// export default {
-//     data: function () {
-//         return {
-//             freshpartner: freshpartner
-//         }
-//     }
-// }
 </script>
 
 <style>
