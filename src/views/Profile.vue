@@ -4,7 +4,7 @@
         <sidebar></sidebar>
         <div id = "content">
             <user-dets v-bind:userDetails="userDetails"></user-dets>
-            <order-dets v-bind:userDetails="userDetails" v-if = "userDetails.type == 'customer'"></order-dets>
+            <order-dets v-bind:userDetails="userDetails" v-if = "userType == 'customer'"></order-dets>
         </div>
     </div>
 </template>
@@ -13,16 +13,12 @@
 import SideBar from "../components/SideBar.vue"
 import OrderDetails from "../components/OrderDetails.vue"
 import UserDetails from "../components/UserDetails.vue"
+import { getCustomerDetails, getUserType } from '../database/queries.js'
 export default {
     data() {
         return {
-            userDetails: {
-                name: "",
-                email: "",
-                phone: "",
-                type: "",
-                id: ""
-            }
+            userDetails: [],
+            userType: Object
         }
     },
     components: {
@@ -32,16 +28,21 @@ export default {
 
     },
     created: function() {
-        // Insert database query here
-        // Placeholder
-        this.userDetails = {
-            name: "BBLoh",
-            email: "bbloh@googlepay.com",
-            phone: "99999999",
-            type: "customer",
-            id: "asdu13489yy93"
 
-        }
+        // Placeholder username
+        getCustomerDetails("username").then(docs => {
+            let detailArray = docs.map(x => x.data());
+            this.userDetails = detailArray[0];
+        });
+
+        getUserType("1").then(type => {
+            this.userType = type;
+        });
+
+
+
+
+        
     }
 }
 </script>
