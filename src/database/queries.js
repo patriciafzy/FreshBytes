@@ -41,8 +41,10 @@ export function getUserType(docId) {
             }
         });
 }
-    
 
+
+    
+export function getUserOrders()
     
 
 
