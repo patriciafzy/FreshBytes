@@ -1,8 +1,11 @@
 <template>
     <div id = "userDet">
         <h1>Your User Details</h1>
-        <p>Name: {{userDetails.name}}</p>
-
+        <p>Name: <span>{{this.userDetails.name}}</span></p>
+        <p>Email: <span>{{this.userDetails.email}}</span></p>
+        <p>Username: <span>{{this.userDetails.username}}</span></p>
+        <p>Points: <span>{{this.userDetails.points}}</span></p>
+        <p>Location: <span>{{this.userDetails.location}}</span></p>
     </div>
 </template>
 
@@ -14,6 +17,9 @@ export default {
     },
     props: {
         userDetails: Object
+    },
+    methods: {
+
     }
     
 }
@@ -23,6 +29,13 @@ export default {
     #userDet {
         border: green solid 2px;
         text-align: left;
+    }
+    p {
+        font-weight: bold;
+    }
+
+    span {
+        font-weight: normal;
     }
 
 </style>

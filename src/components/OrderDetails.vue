@@ -1,6 +1,6 @@
 <template>
     <div id = "orderDets">
-        <h2>Your Past Orders</h2>
+        <h1>Your Past Orders</h1>
         <ul id = "orderList">
             <li v-for = "order in allOrders" :key = "order.id" id = "indiOrder">
                 Order #: {{order.id}}  <ul id = "itemList">
@@ -22,39 +22,22 @@ export default {
         }
     },
     props: {
-        userDetails: Object
+        userId: String,
+        userType: String
     },
     created: function() {
 
         // query database to get orders
         // this.allOrders = getOrders(this.userDetails.id);
         // placeholder
-        this.allOrders = [
-            {
-                id: "74198",
-                items: [
-                    {
-                        id: "jj88",
-                        name: "50% off Loh Hei",
-                        qty: "10",
-                        price: "2"
-                    },
-                    {
-                        id: "sd44",
-                        name: "30% off Sushi",
-                        qty: "2",
-                        price: "1"
-                    }
-                ]
-            }
-        ]
+
     }
 }
 </script>
 
 <style scoped>
     #orderDets {
-        width: 700px;
+        text-align: left;
         border: blue solid 2px;
     }
 

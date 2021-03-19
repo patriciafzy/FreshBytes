@@ -4,7 +4,7 @@
         <sidebar></sidebar>
         <div id = "content">
             <user-dets v-bind:userDetails="userDetails"></user-dets>
-            <order-dets v-bind:userDetails="userDetails" v-if = "userType == 'customer'"></order-dets>
+            <order-dets v-bind:userId="userId" v-bind:userType="userType" v-if = "userType == 'customer'"></order-dets>
         </div>
     </div>
 </template>
@@ -17,8 +17,14 @@ import { getCustomerDetails, getUserType } from '../database/queries.js'
 export default {
     data() {
         return {
-            userDetails: [],
-            userType: Object
+            userDetails: Object,
+            userType: String,
+            toShow: {
+                userDet: true,
+                orderDet: false,
+                dashboard: false
+            },
+            userId: String
         }
     },
     components: {
@@ -29,15 +35,27 @@ export default {
     },
     created: function() {
 
-        // Placeholder username
-        getCustomerDetails("username").then(docs => {
-            let detailArray = docs.map(x => x.data());
-            this.userDetails = detailArray[0];
-        });
-
+        // Placeholder id
         getUserType("1").then(type => {
             this.userType = type;
+
+            if (type == "customer") {
+                // Only query if user is a customer
+                // Placeholder username
+                getCustomerDetails("username").then(docs => {
+                    let detailArray = docs.map(x => x.data());
+                    this.userDetails = detailArray[0];
+
+                    let idArray = docs.map(x => x.id);
+                    this.userId = idArray[0];
+                });
+
+            }
         });
+
+
+
+
 
 
 

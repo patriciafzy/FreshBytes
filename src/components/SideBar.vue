@@ -1,8 +1,8 @@
 <template>
     <div class="sidebar">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
+        <a class="active" href="#home">Dashboard</a>
+        <a href="#news">Your Details</a>
+        <a href="#contact">Orders</a>
         <a href="#about">About</a>
     </div>
 </template>
