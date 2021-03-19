@@ -2,7 +2,7 @@
     <div id = "userDet">
         <h1>Your User Details</h1>
         <p>Name: {{userDetails.name}}</p>
-        <p>etc.</p>
+
     </div>
 </template>
 
