@@ -1,4 +1,5 @@
-import 'firebase.js';
+import './firebase.js';
+import database from './firebase.js';
 
 export function validateLogin(username, password) {
     return database.collection('users').doc(username).get().then(snapshot => {
@@ -16,4 +17,7 @@ export function validateLogin(username, password) {
     })
 }
 
-
+export function addListing(item) {
+        database.collection("items").add(item).then(() => location.reload());
+        alert("Listing successfully added!")
+}
