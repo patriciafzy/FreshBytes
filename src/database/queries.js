@@ -1,4 +1,3 @@
-import './firebase.js';
 import database from './firebase.js';
 
 export function validateLogin(username, password) {
@@ -17,8 +16,10 @@ export function validateLogin(username, password) {
     })
 }
 
-/*
-    Assume username is unique for now
+/**
+ * Gets user details via username
+ * @param {String} username  CURRENTLY ASSUME THAT THIS IS BEING STORED AFTER LOGIN
+ * @returns The user details
  */
 export function getCustomerDetails(username) {
     return database.collection('customers')
@@ -28,23 +29,43 @@ export function getCustomerDetails(username) {
         });
 }
 
-
-export function getUserType(docId) {
+/**
+ * Gets user type
+ * @param {String} username
+ * @returns Either customer or business
+ */
+export function getUserType(username) {
     return database.collection('users')
-        .doc(docId).get().then(snapshot => {
-            let isCustomer = snapshot.data().isCustomer;
+    .where("username", "==", username)
+    .get().then(snapshot => {
+        let isCustomer = snapshot.docs.map(x => x.data())[0];
 
-            if (isCustomer) {
-                return "customer";
-            } else {
-                return "business";
-            }
-        });
+        if (isCustomer) {
+            return "customer";
+        } else {
+            return "business";
+        }
+
+    });
+ 
 }
 
 
-    
-export function getUserOrders()
+/**
+ * Gets orders for the associated user.
+ * @param {String} userType 
+ * @param {String} userId 
+ * @returns All orders related to the user ID.
+ */
+export function getUserOrders(userType, userId) {
+    let formatUserType = userType == "customer" ? "/customers/" : "/businesses/"
+    let userKey = formatUserType + userId
+
+
+    return database.collection("orders")
+        .where(userType, "==", userKey)
+        .get();
+}
     
 
 

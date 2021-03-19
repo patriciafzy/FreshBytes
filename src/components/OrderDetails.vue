@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { getUserOrders } from '../database/queries'
 export default {
     data() {
         return {
@@ -28,9 +29,7 @@ export default {
     created: function() {
 
         // query database to get orders
-        // this.allOrders = getOrders(this.userDetails.id);
-        // placeholder
-
+        getUserOrders(this.userType, this.userId).then();
     }
 }
 </script>

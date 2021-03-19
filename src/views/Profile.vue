@@ -36,7 +36,7 @@ export default {
     created: function() {
 
         // Placeholder id
-        getUserType("1").then(type => {
+        getUserType("username").then(type => {
             this.userType = type;
 
             if (type == "customer") {
