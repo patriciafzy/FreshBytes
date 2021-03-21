@@ -2,34 +2,32 @@
     <div id = "orderDets">
         <h1>Your Past Orders</h1>
         <ul id = "orderList">
-            <li v-for = "order in allOrders" :key = "order.id" id = "indiOrder">
-                Order #: {{order.id}}  <ul id = "itemList">
-                    <li v-for = "item in order.items" :key = "item.id" id = "indiItem">
-                        Item: {{item.name}} | Price: ${{item.price}} | Quantity: {{item.qty}}
-                    </li>
-                </ul>
+            <li v-for = "order in this.allOrders" :key = "order.id">
+                Order Number: {{order.id}} Item: to add | Quantity: {{order.data().quantity}}
             </li>
         </ul>
-
+        
     </div>
 </template>
 
 <script>
-import { getUserOrders } from '../database/queries'
+import { getFromDocRef } from '../database/queries'
 export default {
     data() {
         return {
-            allOrders: []
+            allListings: []
         }
     },
     props: {
-        userId: String,
-        userType: String
+        allOrders: []
     },
-    created: function() {
+    methods: {
 
-        // query database to get orders
-        getUserOrders(this.userType, this.userId).then();
+        
+
+    },
+    computed: {
+
     }
 }
 </script>

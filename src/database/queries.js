@@ -19,13 +19,15 @@ export function validateLogin(username, password) {
 /**
  * Gets user details via username
  * @param {String} username  CURRENTLY ASSUME THAT THIS IS BEING STORED AFTER LOGIN
- * @returns The user details
+ * @returns A QueryDocumentSnapshot of user details
  */
-export function getCustomerDetails(username) {
-    return database.collection('customers')
+export function getCustomerDetails(username, userType) {
+    const formatUserType = userType == "customer" ? "customers" : "businesses";
+
+    return database.collection(formatUserType)
         .where("username", "==", username)
         .get().then(snapshot => {
-            return snapshot.docs;
+            return snapshot.docs[0];
         });
 }
 
@@ -55,16 +57,21 @@ export function getUserType(username) {
  * Gets orders for the associated user.
  * @param {String} userType 
  * @param {String} userId 
- * @returns All orders related to the user ID.
+ * @returns An array of QueryDocumentSnapshot of all orders related to the user ID.
  */
 export function getUserOrders(userType, userId) {
-    let formatUserType = userType == "customer" ? "/customers/" : "/businesses/"
-    let userKey = formatUserType + userId
-
+    const formatUserType = userType == "customer" ? "customers" : "businesses";
+    const docRef = database.collection(formatUserType).doc(userId);
 
     return database.collection("orders")
-        .where(userType, "==", userKey)
-        .get();
+        .where(userType, "==", docRef)
+        .get().then(snapshot => {
+            return snapshot.docs;
+        });
+}
+
+export function getFromDocRef(docRef) {
+    return docRef.get();
 }
     
 

@@ -4,7 +4,7 @@
         <sidebar></sidebar>
         <div id = "content">
             <user-dets v-bind:userDetails="userDetails"></user-dets>
-            <order-dets v-bind:userId="userId" v-bind:userType="userType" v-if = "userType == 'customer'"></order-dets>
+            <order-dets v-bind:allOrders="allOrders" v-if = "userType == 'customer'"></order-dets>
         </div>
     </div>
 </template>
@@ -13,12 +13,13 @@
 import SideBar from "../components/SideBar.vue"
 import OrderDetails from "../components/OrderDetails.vue"
 import UserDetails from "../components/UserDetails.vue"
-import { getCustomerDetails, getUserType } from '../database/queries.js'
+import { getCustomerDetails, getUserType, getUserOrders } from '../database/queries.js'
 export default {
     data() {
         return {
             userDetails: Object,
             userType: String,
+            allOrders: [],
             toShow: {
                 userDet: true,
                 orderDet: false,
@@ -38,16 +39,19 @@ export default {
         // Placeholder id
         getUserType("username").then(type => {
             this.userType = type;
-
             if (type == "customer") {
                 // Only query if user is a customer
                 // Placeholder username
-                getCustomerDetails("username").then(docs => {
-                    let detailArray = docs.map(x => x.data());
-                    this.userDetails = detailArray[0];
+                getCustomerDetails("username", type).then(docs => {
+                    this.userDetails = docs.data();
 
-                    let idArray = docs.map(x => x.id);
-                    this.userId = idArray[0];
+                    this.userId  = docs.id;
+
+                            getUserOrders(this.userType, this.userId).then(doc => {
+                                console.log(doc[0].data());
+                                this.allOrders = doc;
+                            });
+
                 });
 
             }
