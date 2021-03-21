@@ -1,10 +1,10 @@
 <template>
     <div>
         <h1>{{userDetails.name}}'s Profile Page</h1>
-        <sidebar></sidebar>
+        <sidebar v-on:change-profile="changeDetails"></sidebar>
         <div id = "content">
-            <user-dets v-bind:userDetails="userDetails"></user-dets>
-            <order-dets v-bind:allOrders="allOrders" v-if = "userType == 'customer'"></order-dets>
+            <user-dets v-bind:userDetails="userDetails" v-if = "toShow.details == true"></user-dets>
+            <order-dets v-bind:allOrders="allOrders" v-if = "toShow.orders == true"></order-dets>
         </div>
     </div>
 </template>
@@ -21,11 +21,19 @@ export default {
             userType: String,
             allOrders: [],
             toShow: {
-                userDet: true,
-                orderDet: false,
+                details: true,
+                orders: false,
                 dashboard: false
             },
             userId: String
+        }
+    },
+    methods: {
+        changeDetails: function(event) {
+            for (const property in this.toShow) {
+                this.toShow[property] = property == event ? true : false;
+            }
+            console.log(event);
         }
     },
     components: {
@@ -43,6 +51,8 @@ export default {
                 // Only query if user is a customer
                 // Placeholder username
                 getCustomerDetails("username", type).then(docs => {
+
+                    // to fix : prop fails type check - enumerate into new object
                     this.userDetails = docs.data();
 
                     this.userId  = docs.id;

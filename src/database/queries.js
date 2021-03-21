@@ -57,7 +57,7 @@ export function getUserType(username) {
  * Gets orders for the associated user.
  * @param {String} userType 
  * @param {String} userId 
- * @returns An array of QueryDocumentSnapshot of all orders related to the user ID.
+ * @returns A Promise of an array of QueryDocumentSnapshot of all orders related to the user ID.
  */
 export function getUserOrders(userType, userId) {
     const formatUserType = userType == "customer" ? "customers" : "businesses";

@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { getFromDocRef } from '../database/queries'
 export default {
     data() {
         return {
