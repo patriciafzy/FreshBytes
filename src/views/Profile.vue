@@ -4,9 +4,9 @@
         <sidebar v-on:change-profile="changeDetails"></sidebar>
         <div id = "content">
             <user-dets v-bind:userDetails="userDetails" v-if = "toShow.details == true"></user-dets>
-            <order-dets v-bind:allOrders="allOrders" v-if = "toShow.orders == true"></order-dets>
+            <order-dets v-bind:userType="userType" v-bind:userId="userId" v-if = "toShow.orders == true"></order-dets>
         </div>
-
+        
     </div>
 
 </template>
@@ -15,12 +15,12 @@
 import SideBar from "../components/SideBar.vue"
 import OrderDetails from "../components/OrderDetails.vue"
 import UserDetails from "../components/UserDetails.vue"
-import { getUserDetails, getUserType, getUserOrders } from '../database/queries.js'
+import { getUserDetails, getUserType } from '../database/queries.js'
 export default {
     data() {
         return {
             userDetails: Object,
-            userType: String,
+            userType: "",
             allOrders: [],
             toShow: {
                 details: true,
@@ -57,10 +57,6 @@ export default {
                 getUserDetails("username", type).then(doc => {
                     this.userDetails = doc.data();
                     this.userId  = doc.id;
-
-                            getUserOrders(this.userType, this.userId).then(orders => {
-                                this.allOrders = orders;
-                            });
 
                 });
 

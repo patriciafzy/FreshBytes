@@ -54,12 +54,12 @@ export function getUserType(username) {
 
 
 /**
- * Gets orders for the associated user.
+ * Gets orders with listing for the associated user.
  * @param {String} userType 
  * @param {String} userId 
- * @returns A Promise of an array of QueryDocumentSnapshot of all orders related to the user ID.
+ * @returns A Promise of an array of all order data related to the user ID.
  */
-export function getUserOrders(userType, userId) {
+export function getUserOrdersWithListing(userType, userId) {
     const formatUserType = userType == "customer" ? "customers" : "businesses";
     const docRef = database.collection(formatUserType).doc(userId);
 
@@ -67,11 +67,40 @@ export function getUserOrders(userType, userId) {
         .where(userType, "==", docRef)
         .get().then(snapshot => {
             return snapshot.docs;
+        }).then(orders => {
+            var allOrders = [];
+
+            orders.forEach(async(order) => {
+                var actualOrder = {};
+
+                // Copy over all fields other than listingID
+                // Use document reference in listingID to query
+                for (const property in order.data()) {
+                    if (property != "listingID") {
+                        actualOrder[property] = order.data()[property];
+                    } else {
+                        let listingRef = order.data()[property];
+                        var actualListing = await getFromDocRef(listingRef);
+                        actualOrder[property] = actualListing;
+                    }
+                    // Add ID as a field to the created order object
+                    actualOrder.id = order.id;
+                }
+                allOrders.push(actualOrder);
+            });
+            return allOrders;
         });
 }
 
-export function getFromDocRef(docRef) {
-    return docRef.get();
+/**
+ * Gets document data via a document reference
+ * @param {firebase.firestore.DocumentReference<T>} docRef
+ * @returns A Promise resolving into a data object of the document
+ */
+function getFromDocRef(docRef) {
+    return docRef.get().then(snapshot => {
+        return snapshot.data();
+    });
 }
     
 
