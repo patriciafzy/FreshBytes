@@ -2,7 +2,7 @@
     <div id = "orderDets">
         <h1>Your Past Orders</h1>
         <ul id = "orderList">
-            <li v-for = "order in this.totalOrders" :key = "order.id" >
+            <li v-for = "order in this.allOrders" :key = "order.id" >
                 Order Number: {{order.id}} | Item: {{order.listingID.name}} | Quantity: {{order.quantity}}
             </li>
         </ul>
@@ -10,16 +10,14 @@
 </template>
 
 <script>
-import { getUserOrdersWithListing } from '../database/queries';
 export default {
     data() {
         return {
-            totalOrders: []
+            
         }
     },
     props: {
-        userType: String,
-        userId: String
+        allOrders: {}
     },
     methods: {
 
@@ -27,9 +25,11 @@ export default {
 
     },
     created: function() {
+        /*
         getUserOrdersWithListing(this.userType, this.userId).then(allOrders => {
             this.totalOrders = allOrders;
         });
+        */
     }
 }
 </script>

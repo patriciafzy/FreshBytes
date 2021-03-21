@@ -3,8 +3,8 @@
         <h1>{{userDetails.name}}'s Profile Page</h1>
         <sidebar v-on:change-profile="changeDetails"></sidebar>
         <div id = "content">
-            <user-dets v-bind:userDetails="userDetails" v-if = "toShow.details == true"></user-dets>
-            <order-dets v-bind:userType="userType" v-bind:userId="userId" v-if = "toShow.orders == true"></order-dets>
+            <user-dets v-bind:userDetails="userDetails" v-if = "toShow.details"></user-dets>
+            <order-dets v-bind:allOrders="allOrders" v-if = "toShow.orders"></order-dets>
         </div>
         
     </div>
@@ -15,7 +15,7 @@
 import SideBar from "../components/SideBar.vue"
 import OrderDetails from "../components/OrderDetails.vue"
 import UserDetails from "../components/UserDetails.vue"
-import { getUserDetails, getUserType } from '../database/queries.js'
+import { getUserDetails, getUserType, getUserOrdersWithListing } from '../database/queries.js'
 export default {
     data() {
         return {
@@ -57,6 +57,10 @@ export default {
                 getUserDetails("username", type).then(doc => {
                     this.userDetails = doc.data();
                     this.userId  = doc.id;
+
+                    getUserOrdersWithListing(type, doc.id).then(orders => {
+                        this.allOrders = orders;
+                    });
 
                 });
 

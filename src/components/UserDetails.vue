@@ -1,11 +1,14 @@
 <template>
     <div id = "userDet">
         <h1>Your User Details</h1>
-        <p>Name: <span>{{this.userDetails.name}}</span></p>
-        <p>Email: <span>{{this.userDetails.email}}</span></p>
-        <p>Username: <span>{{this.userDetails.username}}</span></p>
-        <p>Points: <span>{{this.userDetails.points}}</span></p>
-        <p>Location: <span>{{this.userDetails.location}}</span></p>
+        <div v-if = "!isEdit">
+            <p>Name: <span>{{this.userDetails.name}}</span></p>
+            <p>Email: <span>{{this.userDetails.email}}</span></p>
+            <p>Username: <span>{{this.userDetails.username}}</span></p>
+            <p>Points: <span>{{this.userDetails.points}}</span></p>
+            <p>Location: <span>{{this.userDetails.location}}</span></p>
+        </div>
+        <button type = "button">Change Details</button>
     </div>
 </template>
 
@@ -13,6 +16,7 @@
 export default {
     data() {
         return {
+            isEdit: false
         }
     },
     props: {
