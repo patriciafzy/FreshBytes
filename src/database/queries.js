@@ -69,32 +69,44 @@ export function getUserOrdersWithListing(userType, userId) {
             return snapshot.docs;
         }).then(orders => {
             var allOrders = [];
-
-            orders.forEach(async(order) => {
-                var actualOrder = {};
-
-                // Copy over all fields other than listingID
-                // Use document reference in listingID to query
-                for (const property in order.data()) {
-                    if (property != "listingID") {
-                        actualOrder[property] = order.data()[property];
-                    } else {
-                        let listingRef = order.data()[property];
-                        var actualListing = await getFromDocRef(listingRef);
-                        actualOrder[property] = actualListing;
-                    }
-                    // Add ID as a field to the created order object
-                    actualOrder.id = order.id;
-                }
-                allOrders.push(actualOrder);
+            orders.forEach(order => {
+                extractListing(order).then(actual => {
+                    allOrders.push(actual);
+                });
             });
             return allOrders;
         });
 }
 
 /**
+ * Extracts the actual listing data from an order snapshot
+ * @param {firebase.firestore.QueryDocumentSnapshot} order 
+ * @returns The order's data with the actual listing data 
+ * instead of a document reference, and the order's document id 
+ * added on as a field.
+ */
+async function extractListing(order) {
+    var actualOrder = {};
+
+    // Copy over all fields other than listingID
+    // Use document reference in listingID to query
+    for (const property in order.data()) {
+        if (property != "listingID") {
+            actualOrder[property] = order.data()[property];
+        } else {
+            let listingRef = order.data()[property];
+            var actualListing = await getFromDocRef(listingRef);
+            actualOrder[property] = actualListing;
+        }
+        // Add ID as a field to the created order object
+        actualOrder.id = order.id;
+    }
+    return actualOrder;
+}
+
+/**
  * Gets document data via a document reference
- * @param {firebase.firestore.DocumentReference<T>} docRef
+ * @param {firebase.firestore.DocumentReference} docRef
  * @returns A Promise resolving into a data object of the document
  */
 function getFromDocRef(docRef) {
