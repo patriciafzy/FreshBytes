@@ -29,7 +29,6 @@ export default {
     created: function() {
         getUserOrdersWithListing(this.userType, this.userId).then(allOrders => {
             this.totalOrders = allOrders;
-            console.log(this.totalOrders);
         });
     }
 }
