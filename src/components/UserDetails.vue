@@ -6,6 +6,7 @@
         <p>Username: <span>{{this.userDetails.username}}</span></p>
         <p>Points: <span>{{this.userDetails.points}}</span></p>
         <p>Location: <span>{{this.userDetails.location}}</span></p>
+        {{typeof(this.userDetails)}}
     </div>
 </template>
 
@@ -16,7 +17,7 @@ export default {
         }
     },
     props: {
-        userDetails: Object
+        userDetails: {}
     },
     methods: {
 

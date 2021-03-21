@@ -6,14 +6,16 @@
             <user-dets v-bind:userDetails="userDetails" v-if = "toShow.details == true"></user-dets>
             <order-dets v-bind:allOrders="allOrders" v-if = "toShow.orders == true"></order-dets>
         </div>
+
     </div>
+
 </template>
 
 <script>
 import SideBar from "../components/SideBar.vue"
 import OrderDetails from "../components/OrderDetails.vue"
 import UserDetails from "../components/UserDetails.vue"
-import { getCustomerDetails, getUserType, getUserOrders } from '../database/queries.js'
+import { getUserDetails, getUserType, getUserOrders } from '../database/queries.js'
 export default {
     data() {
         return {
@@ -36,7 +38,6 @@ export default {
             for (const property in this.toShow) {
                 this.toShow[property] = property == event ? true : false;
             }
-            console.log(event);
         }
     },
     components: {
@@ -53,16 +54,12 @@ export default {
             if (type == "customer") {
                 // Only query if user is a customer
                 // Placeholder username
-                getCustomerDetails("username", type).then(docs => {
+                getUserDetails("username", type).then(doc => {
+                    this.userDetails = doc.data();
+                    this.userId  = doc.id;
 
-                    // to fix : prop fails type check - enumerate into new object
-                    this.userDetails = docs.data();
-
-                    this.userId  = docs.id;
-
-                            getUserOrders(this.userType, this.userId).then(doc => {
-                                console.log(doc[0].data());
-                                this.allOrders = doc;
+                            getUserOrders(this.userType, this.userId).then(orders => {
+                                this.allOrders = orders;
                             });
 
                 });

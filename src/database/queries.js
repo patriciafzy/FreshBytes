@@ -21,7 +21,7 @@ export function validateLogin(username, password) {
  * @param {String} username  CURRENTLY ASSUME THAT THIS IS BEING STORED AFTER LOGIN
  * @returns A QueryDocumentSnapshot of user details
  */
-export function getCustomerDetails(username, userType) {
+export function getUserDetails(username, userType) {
     const formatUserType = userType == "customer" ? "customers" : "businesses";
 
     return database.collection(formatUserType)

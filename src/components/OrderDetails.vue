@@ -6,19 +6,19 @@
                 Order Number: {{order.id}} Item: to add | Quantity: {{order.data().quantity}}
             </li>
         </ul>
-        
+        <p>{{}}</p>
     </div>
 </template>
 
 <script>
+//import { getFromDocRef } from '../database/queries';
 export default {
     data() {
         return {
-            allListings: []
         }
     },
     props: {
-        allOrders: []
+        allOrders: Array
     },
     methods: {
 
@@ -26,7 +26,23 @@ export default {
 
     },
     computed: {
+        /*
+        allListings: function() {
+            let listings = {};
 
+            this.allOrders.forEach(order => {
+
+                let listingRef = order.data().listingID;
+
+                getFromDocRef(listingRef).then(snapshot => {
+                    listings[order.id] = snapshot.data();
+                });
+
+            });
+            console.log(listings);
+            return listings;
+        }
+        */
     }
 }
 </script>
