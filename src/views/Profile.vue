@@ -29,6 +29,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * Changes the displayed element in the profile page based on a click on the sidebar
+         */
         changeDetails: function(event) {
             for (const property in this.toShow) {
                 this.toShow[property] = property == event ? true : false;
