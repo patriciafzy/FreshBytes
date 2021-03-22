@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
+import ProductList from '../views/ProductList.vue'
+import Product from '../components/Product.vue'
+import AddListing from '../components/AddListing.vue'
+import ReviewListing from '../components/ReviewListing.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +27,25 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+    path: '/ProductList',
+    name: 'ProductList',
+    component: ProductList,
+  },
+  {
+    path: '/products/:id',
+    name: 'product',
+    component: Product,
+  },
+    path: '/addlisting',
+    name: 'Add Listing',
+    component: AddListing
+  },
+  {
+    path: '/reviewListing',
+    name: 'Review Listing',
+    component: ReviewListing,
+    props: true,
   }
 ]
 
