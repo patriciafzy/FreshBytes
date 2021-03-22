@@ -129,7 +129,8 @@ function getFromDocRef(docRef) {
         return snapshot.data();
     });
 }
-    
+ 
+/**
  * Uploads a base64 image string to the Firebase storage and retrieves a url 
  * @param {*} baseUrl A base64 string of image data
  * @param {*} imageName The name of the image
