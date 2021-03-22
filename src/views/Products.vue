@@ -46,7 +46,7 @@ export default {
 
   computed: {
     filteredList() {
-      return this.$store.state.products.filter((post) => {
+      return this.products.filter((post) => {
         return post[1].name.toLowerCase().includes(this.search.toLowerCase());
       });
     },

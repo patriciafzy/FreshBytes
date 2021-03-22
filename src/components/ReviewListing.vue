@@ -22,14 +22,9 @@
 import { addListing } from "../database/queries.js";
 
 export default {
-  data() {
-    return {};
-  },
-
   props: {
-    items: {},
+    items: Object,
   },
-
   methods: {
     sendListing: function () {
       addListing(this.items);

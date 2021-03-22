@@ -2,10 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
-import ProductList from "../views/ProductList.vue";
+import Products from "../views/Products.vue";
 import Product from "../components/Product.vue";
 import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
+import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -17,7 +18,7 @@ const routes = [
   },
   {
     path: "/about",
-    name: "About",
+    name: "about",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -26,27 +27,27 @@ const routes = [
   },
   {
     path: "/profile",
-    name: "Profile",
+    name: "profile",
     component: Profile,
   },
   {
-    path: "/productList",
-    name: "ProductList",
-    component: ProductList,
+    path: "/products",
+    name: "products",
+    component: Products,
   },
   {
     path: "/products/:id",
-    name: "Product",
+    name: "product",
     component: Product,
   },
   {
     path: "/addlisting",
-    name: "AddListing",
+    name: "addListing",
     component: AddListing,
   },
   {
     path: "/reviewListing",
-    name: "ReviewListing",
+    name: "reviewListing",
     component: ReviewListing,
     props: true,
   },
@@ -56,6 +57,20 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+// Protected Routes
+const loginGuard = [
+  "profile",
+  "products",
+  "product",
+  "addListing",
+  "reviewListing",
+];
+
+router.beforeEach((to, from, next) => {
+  if (!loginGuard.includes(to.name) || store.getters.isLoggedIn) return next();
+  return next({ name: "Home" });
 });
 
 export default router;

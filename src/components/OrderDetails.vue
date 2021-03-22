@@ -33,6 +33,7 @@ export default {
 #orderDets {
   text-align: left;
   border: blue solid 2px;
+  padding: 10px;
 }
 
 #indiOrder {

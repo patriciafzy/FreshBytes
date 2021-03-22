@@ -3,6 +3,7 @@ import database from "./firebase.js";
 import firebase from "firebase";
 
 export function validateLogin(username, password) {
+  console.log(username, password);
   return database
     .collection("users")
     .doc(username)
@@ -18,7 +19,8 @@ export function validateLogin(username, password) {
         return false;
       }
 
-      return true;
+      userData.username = username;
+      return userData;
     });
 }
 /**

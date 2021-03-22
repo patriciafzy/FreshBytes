@@ -6,11 +6,22 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    isLoggedIn: false,
+    userData: {
+      username: "",
+    },
     products: [],
   },
   mutations: {
     setCategories(state, val) {
       state.products = val;
+    },
+    toggleLogin(state) {
+      state.isLoggedIn = !state.isLoggedIn;
+    },
+    login(state, payload) {
+      state.isLoggedIn = true;
+      state.userData = payload;
     },
   },
   actions: {
@@ -36,11 +47,19 @@ const store = new Vuex.Store({
     },
   },
   getters: {
-    categories(state) {
+    categories: function (state) {
       return state.products;
     },
-    product: (state) => (id) => {
-      return state.products.filter((p) => p[0] === id);
+    product: function (state) {
+      return (id) => {
+        return state.products.filter((p) => p[0] === id);
+      };
+    },
+    isLoggedIn: function (state) {
+      return state.isLoggedIn;
+    },
+    getUsername: function (state) {
+      return state.userData.username;
     },
   },
   modules: {},

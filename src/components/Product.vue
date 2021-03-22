@@ -9,11 +9,7 @@
           <p>Original Price: ${{ product[1].originalPrice }}</p>
           <p>
             You will save
-            <b
-              >${{
-                (product[1].originalPrice - product[1].price).toFixed(2)
-              }}</b
-            >!
+            <b> ${{ price }} </b>!
           </p>
           <p>Description: {{ product[1].description }}</p>
           <p>
@@ -38,17 +34,20 @@
 <script>
 export default {
   name: "Product",
-
   props: {
     id: {
       type: String,
     },
   },
-
   data() {
     return {
       product: this.$store.getters.product(this.$route.params.id)[0],
     };
+  },
+  computed: {
+    price: function () {
+      return (this.product[1].originalPrice - this.product[1].price).toFixed(2);
+    },
   },
 };
 </script>
