@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Profile from '../views/Profile.vue'
 import ProductList from '../views/ProductList.vue'
 import Product from '../components/Product.vue'
 import AddListing from '../components/AddListing.vue'
@@ -23,6 +24,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
     path: '/ProductList',
     name: 'ProductList',
     component: ProductList,
