@@ -1,6 +1,6 @@
 <template>
   <div id="userDet">
-    <h1>Your User Details</h1>
+    <h1 class="title is-5">Your User Details</h1>
     <div v-if="!isEdit">
       <p>Name: {{ this.userDetails.name }}</p>
       <p>Email: {{ this.userDetails.email }}</p>

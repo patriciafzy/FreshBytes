@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <h1>About Us</h1>
-    <h2>Less Waste, Better Taste</h2>
+    <h1 class="title is-1">About Us</h1>
+    <h1 class="title is-3">Less Waste, Better Taste</h1>
     <p>
       We connect you to F&B businesses and local supermarket who have fresh but
       excess meals or products for sale and consumption at discounted rates.
@@ -22,12 +22,12 @@
       decker buses.
     </p>
     <br /><br /><br />
-    <h2>Our Partners</h2>
+    <h1 class="title is-3">Our Partners</h1>
     <img
       src="../assets/img/freshpartners.png"
       height="200px"
     /><br /><br /><br /><br />
-    <h2>Our Team</h2>
+    <h1 class="title is-3">Our Team</h1>
     <br />
     <ul>
       <li>

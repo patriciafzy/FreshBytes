@@ -1,10 +1,13 @@
 <template>
   <div class="home">
-    <h1><i>FreshBytes</i></h1>
-    <button v-on:click="toggleLogin">Toggle Login</button>
-    <h4>{{ isLoggedIn }}</h4>
+    <h1 class="title is-1"><i>FreshBytes</i></h1>
+    <!-- <button v-on:click="toggleLogin">Toggle Login</button>
+    <h4>{{ isLoggedIn }}</h4> -->
     <login v-if="!isLoggedIn" />
-    <h1 v-else>Welcome {{ getUsername }}!</h1>
+    <div v-else>
+      <h1 class="title is-3">Welcome {{ getUsername }}!</h1>
+      <b-button class="is-primary" rounded v-on:click="logout">Logout</b-button>
+    </div>
   </div>
 </template>
 
@@ -19,6 +22,9 @@ export default {
   methods: {
     toggleLogin: function () {
       this.$store.commit("toggleLogin");
+    },
+    logout: function () {
+      this.$store.commit("logout");
     },
   },
   computed: {

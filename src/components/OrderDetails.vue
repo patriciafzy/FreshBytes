@@ -1,6 +1,6 @@
 <template>
   <div id="orderDets">
-    <h1>Your Past Orders</h1>
+    <h1 class="title is-5">Your Past Orders</h1>
     <ul id="orderList">
       <li v-for="order in this.allOrders" :key="order.id">
         Order Number: {{ order.id }} | Item: {{ order.listingID.name }} |

@@ -1,9 +1,28 @@
 <template>
-  <div class="container">
-    <h3>Login</h3>
-    <input type="text" placeholder="Username" v-model="username" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <button v-on:click="login">Login</button>
+  <div class="columns is-centered">
+    <div class="column is-narrow">
+      <h1 class="title is-3">Login</h1>
+      <b-field>
+        <b-input
+          v-model="username"
+          placeholder="username"
+          icon-pack="fas"
+          icon="user"
+        ></b-input>
+      </b-field>
+      <b-field>
+        <b-input
+          v-model="password"
+          placeholder="password"
+          type="password"
+          icon-pack="fas"
+          icon="lock"
+        ></b-input>
+      </b-field>
+      <b-button type="is-primary" rounded expanded v-on:click="login"
+        >Login</b-button
+      >
+    </div>
   </div>
 </template>
 
@@ -35,15 +54,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  display: flex;
-  justify-content: center;
-}
-
-input,
-button {
-  display: block;
-  margin: 10px;
-}
-</style>
+<style scoped></style>

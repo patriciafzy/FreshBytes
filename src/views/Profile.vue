@@ -1,6 +1,6 @@
 <template>
   <div v-if="userDetails">
-    <h1>{{ userDetails.name }}'s Profile Page</h1>
+    <h1 class="title is-3">{{ userDetails.name }}'s Profile Page</h1>
     <side-bar v-on:change-profile="changeDetails"></side-bar>
     <div id="content">
       <user-details
@@ -57,6 +57,7 @@ export default {
   created: function () {
     // Placeholder id
     getUserType("username").then((type) => {
+      console.log(type);
       this.userType = type;
       if (type == "customer") {
         // Only query if user is a customer
