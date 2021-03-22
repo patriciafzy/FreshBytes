@@ -29,23 +29,23 @@ const routes = [
     component: Profile
   },
   {
-    path: '/ProductList',
+    path: '/productList',
     name: 'ProductList',
     component: ProductList,
   },
   {
     path: '/products/:id',
-    name: 'product',
+    name: 'Product',
     component: Product,
   },
   {
     path: '/addlisting',
-    name: 'Add Listing',
+    name: 'AddListing',
     component: AddListing
   },
   {
     path: '/reviewListing',
-    name: 'Review Listing',
+    name: 'ReviewListing',
     component: ReviewListing,
     props: true,
   }
