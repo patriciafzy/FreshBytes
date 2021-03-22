@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div v-if="userDetails">
     <h1>{{ userDetails.name }}'s Profile Page</h1>
-    <sidebar v-on:change-profile="changeDetails"></sidebar>
+    <side-bar v-on:change-profile="changeDetails"></side-bar>
     <div id="content">
-      <user-dets
+      <user-details
         v-bind:userDetails="userDetails"
         v-if="toShow.details"
-      ></user-dets>
-      <order-dets
+      ></user-details>
+      <order-details
         v-bind:allOrders="allOrders"
         v-if="toShow.orders"
-      ></order-dets>
+      ></order-details>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ import {
 export default {
   data() {
     return {
-      userDetails: {},
+      userDetails: null,
       userType: "",
       allOrders: [],
       toShow: {
@@ -50,9 +50,9 @@ export default {
     },
   },
   components: {
-    sidebar: SideBar,
-    "user-dets": UserDetails,
-    "order-dets": OrderDetails,
+    SideBar,
+    UserDetails,
+    OrderDetails,
   },
   created: function () {
     // Placeholder id
