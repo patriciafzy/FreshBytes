@@ -28,6 +28,7 @@ const routes = [
     name: 'Profile',
     component: Profile
   },
+  {
     path: '/ProductList',
     name: 'ProductList',
     component: ProductList,
@@ -37,6 +38,7 @@ const routes = [
     name: 'product',
     component: Product,
   },
+  {
     path: '/addlisting',
     name: 'Add Listing',
     component: AddListing
