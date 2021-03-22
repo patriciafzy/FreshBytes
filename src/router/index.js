@@ -1,60 +1,76 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Profile from '../views/Profile.vue'
-import ProductList from '../views/ProductList.vue'
-import Product from '../components/Product.vue'
-import AddListing from '../components/AddListing.vue'
-import ReviewListing from '../components/ReviewListing.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Profile from "../views/Profile.vue";
+import Products from "../views/Products.vue";
+import Product from "../components/Product.vue";
+import AddListing from "../components/AddListing.vue";
+import ReviewListing from "../components/ReviewListing.vue";
+import store from "../store/index.js";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
+    path: "/about",
+    name: "about",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile
+    path: "/profile",
+    name: "profile",
+    component: Profile,
   },
   {
-    path: '/ProductList',
-    name: 'ProductList',
-    component: ProductList,
+    path: "/products",
+    name: "products",
+    component: Products,
   },
   {
-    path: '/products/:id',
-    name: 'product',
+    path: "/products/:id",
+    name: "product",
     component: Product,
   },
   {
-    path: '/addlisting',
-    name: 'Add Listing',
-    component: AddListing
+    path: "/addlisting",
+    name: "addListing",
+    component: AddListing,
   },
   {
-    path: '/reviewListing',
-    name: 'Review Listing',
+    path: "/reviewListing",
+    name: "reviewListing",
     component: ReviewListing,
     props: true,
-  }
-]
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+// Protected Routes
+const loginGuard = [
+  "profile",
+  "products",
+  "product",
+  "addListing",
+  "reviewListing",
+];
+
+router.beforeEach((to, from, next) => {
+  if (!loginGuard.includes(to.name) || store.getters.isLoggedIn) return next();
+  return next({ name: "Home" });
+});
+
+export default router;

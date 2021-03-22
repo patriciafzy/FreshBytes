@@ -1,15 +1,30 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/profile">Profile</router-link>
-      <router-link to="/ProductList">Products</router-link> |
-      <router-link to="/about">About</router-link>
+      <div v-if="isLoggedIn">
+        <router-link to="/">Home</router-link> |
+        <router-link :to="{ name: 'products' }">Products</router-link> |
+        <router-link :to="{ name: 'profile' }">Profile</router-link> |
+        <router-link :to="{ name: 'about' }">About</router-link>
+      </div>
+      <div v-else>
+        <router-link to="/">Home</router-link> |
+        <router-link :to="{ name: 'about' }">About</router-link>
+      </div>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
+};
+</script>
 
 <style>
 #app {
@@ -22,13 +37,6 @@
 
 #nav {
   padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  } 
 }
 
 #nav a {

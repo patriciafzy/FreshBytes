@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1><i>FreshBytes</i></h1>
+    <button v-on:click="toggleLogin">Toggle Login</button>
+    <h4>{{ isLoggedIn }}</h4>
+    <login v-if="!isLoggedIn" />
+    <h1 v-else>Welcome {{ getUsername }}!</h1>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Login from "../components/Login.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Login,
+  },
+  methods: {
+    toggleLogin: function () {
+      this.$store.commit("toggleLogin");
+    },
+  },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+    getUsername: function () {
+      return this.$store.getters.getUsername;
+    },
+  },
+};
 </script>
