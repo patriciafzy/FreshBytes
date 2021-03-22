@@ -1,46 +1,41 @@
 <template>
-    <div>
-        <h4> Review Listing </h4>
-        <img v-bind:src="items.picture">
-        <p> Name: {{ items.name }} </p>
-        <p> Description: {{ items.name }} </p>
-        <p> Category: {{ items.category }} </p>
-        <p> Best Before: {{ items.expiryDate }} </p>
-        <p> Original Price: ${{ items.originalPrice }} </p>
-        <p> Listed Price : ${{ items.price }} </p>
-        <p> Quantity: {{ items.quantity }} </p>
-        <p> Delivery Options: {{items.delivery.join()}} </p>
-        <p> Dietary Restriction: {{ items.dietary.join() }} </p>
-        
-        <button type="button" v-on:click="$router.go(-1)">Modify Listing</button>
+  <div>
+    <h4>Review Listing</h4>
+    <img v-bind:src="items.picture" />
+    <p>Name: {{ items.name }}</p>
+    <p>Description: {{ items.name }}</p>
+    <p>Category: {{ items.category }}</p>
+    <p>Best Before: {{ items.expiryDate }}</p>
+    <p>Original Price: ${{ items.originalPrice }}</p>
+    <p>Listed Price : ${{ items.price }}</p>
+    <p>Quantity: {{ items.quantity }}</p>
+    <p>Delivery Options: {{ items.delivery.join() }}</p>
+    <p>Dietary Restriction: {{ items.dietary.join() }}</p>
 
-        <button type="button" v-on:click="sendListing()">Create Listing!</button>
+    <button type="button" v-on:click="$router.go(-1)">Modify Listing</button>
 
-    </div>
+    <button type="button" v-on:click="sendListing()">Create Listing!</button>
+  </div>
 </template>
 
 <script>
-    import {addListing} from "../database/queries.js"
+import { addListing } from "../database/queries.js";
 
-    export default {
-        data() {
-            return {
-                
-            }
-        },
+export default {
+  data() {
+    return {};
+  },
 
-        props: {
-            items: {},
-        },
+  props: {
+    items: {},
+  },
 
-        methods: {
-            sendListing: function() {
-                addListing(this.items)
-            },
-        }
-    }
+  methods: {
+    sendListing: function () {
+      addListing(this.items);
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
