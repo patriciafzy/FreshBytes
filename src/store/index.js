@@ -13,15 +13,19 @@ const store = new Vuex.Store({
     products: [],
   },
   mutations: {
-    setCategories(state, val) {
+    setCategories: function (state, val) {
       state.products = val;
     },
-    toggleLogin(state) {
+    toggleLogin: function (state) {
       state.isLoggedIn = !state.isLoggedIn;
     },
-    login(state, payload) {
+    login: function (state, payload) {
       state.isLoggedIn = true;
       state.userData = payload;
+    },
+    logout: function (state) {
+      state.isLoggedIn = false;
+      state.userData = {};
     },
   },
   actions: {

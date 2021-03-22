@@ -59,13 +59,13 @@ export function getUserDetails(username, userType) {
  * @param {String} username
  * @returns Either customer or business
  */
-export async function getUserType(username) {
+export function getUserType(username) {
   return database
     .collection("users")
-    .where("username", "==", username)
+    .doc(username)
     .get()
     .then((snapshot) => {
-      let isCustomer = snapshot.docs.map((x) => x.data())[0];
+      const isCustomer = snapshot.data().isCustomer;
 
       if (isCustomer) {
         return "customer";
