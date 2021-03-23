@@ -47,6 +47,11 @@ export default {
   props: {
     userDetails: Object,
   },
+  computed: {
+    userData: function () {
+      return this.$store.getters.getUserData;
+    },
+  },
   methods: {
     toggleForm: function () {
       this.isEdit = !this.isEdit;

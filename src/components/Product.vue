@@ -9,7 +9,7 @@
           <p>Original Price: ${{ product[1].originalPrice }}</p>
           <p>
             You will save
-            <b> ${{ price }} </b>!
+            <b> ${{ priceSaved }} </b>!
           </p>
           <p>Description: {{ product[1].description }}</p>
           <p>
@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    price: function () {
+    priceSaved: function () {
       return (this.product[1].originalPrice - this.product[1].price).toFixed(2);
     },
   },

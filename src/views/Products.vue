@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="wrapper">
-      <h2>Featured Items</h2>
+      <h2 class="title is-2">Featured Items</h2>
       <br />
       <div>
         <input type="text" v-model="search" placeholder="Search title.." />

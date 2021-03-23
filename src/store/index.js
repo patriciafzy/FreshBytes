@@ -7,9 +7,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     isLoggedIn: false,
-    userData: {
-      username: "",
-    },
+    userData: {},
     products: [],
   },
   mutations: {
@@ -61,6 +59,9 @@ const store = new Vuex.Store({
     },
     isLoggedIn: function (state) {
       return state.isLoggedIn;
+    },
+    getUserData: function (state) {
+      return state.userData;
     },
     getUsername: function (state) {
       return state.userData.username;

@@ -23,13 +23,14 @@ export function validateLogin(username, password) {
       return userData;
     });
 }
+
 /**
  * Adds a listing to the database's items collections
  * TODO: add the business ID, reroute back to business listings page after completion
  * @param {item} Listing A dictionary of listing details
  */
 export function addListing(item) {
-  var basedata = item.picture.replace(/^data:image\/[a-z]+;base64,/, "");
+  const basedata = item.picture.replace(/^data:image\/[a-z]+;base64,/, "");
   getImageUrl(basedata, item.name, "items").then((url) => {
     item.picture = url;
     database.collection("items").add(item);
