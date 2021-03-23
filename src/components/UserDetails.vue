@@ -5,8 +5,14 @@
       <p>Name: {{ this.userDetails.name }}</p>
       <p>Email: {{ this.userDetails.email }}</p>
       <p>Username: {{ this.userDetails.username }}</p>
-      <p>Points: {{ this.userDetails.points }}</p>
-      <p>Location: {{ this.userDetails.location }}</p>
+      <div v-if="userType == 'customer'">
+        <p>Points: {{ this.userDetails.points }}</p>
+        <p>Location: {{ this.userDetails.location }}</p>
+      </div>
+      <div v-else>
+        <p>Address: {{ this.userDetails.address }}</p>
+        <p>Description: {{ this.userDetails.description }}</p>
+      </div>
       <button type="button" v-on:click="toggleForm">Change Details</button>
     </div>
     <div v-if="isEdit">
@@ -46,6 +52,7 @@ export default {
   },
   props: {
     userDetails: Object,
+    userType: String,
   },
   methods: {
     toggleForm: function () {

@@ -8,6 +8,7 @@
     <div id="content">
       <user-details
         v-bind:userDetails="userDetails"
+        v-bind:userType="userType"
         v-if="toShow.details"
       ></user-details>
       <order-details
@@ -64,22 +65,20 @@ export default {
     AddListing,
   },
   created: function () {
-    // Placeholder id
-    getUserType("username").then((type) => {
+    const username = this.$store.getters.getUsername;
+    console.log(username);
+    getUserType(username).then((type) => {
       console.log(type);
       this.userType = type;
-      if (type == "customer") {
-        // Only query if user is a customer
-        // Placeholder username
-        getUserDetails("username", type).then((doc) => {
-          this.userDetails = doc.data();
-          this.userId = doc.id;
 
-          getUserOrdersWithListing(type, doc.id).then((orders) => {
-            this.allOrders = orders;
-          });
+      getUserDetails(username, type).then((doc) => {
+        this.userDetails = doc.data();
+        this.userId = doc.id;
+
+        getUserOrdersWithListing(type, doc.id).then((orders) => {
+          this.allOrders = orders;
         });
-      }
+      });
     });
   },
 };
