@@ -172,7 +172,7 @@ export default {
       this.validate = status;
       if (this.validate === true) {
         this.$router.push({
-          name: "Review Listing",
+          name: "reviewListing",
           params: { items: this.item },
         });
       }

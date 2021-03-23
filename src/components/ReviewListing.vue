@@ -3,7 +3,7 @@
     <h4>Review Listing</h4>
     <img v-bind:src="items.picture" />
     <p>Name: {{ items.name }}</p>
-    <p>Description: {{ items.name }}</p>
+    <p>Description: {{ items.description }}</p>
     <p>Category: {{ items.category }}</p>
     <p>Best Before: {{ items.expiryDate }}</p>
     <p>Original Price: ${{ items.originalPrice }}</p>
@@ -28,6 +28,7 @@ export default {
   methods: {
     sendListing: function () {
       addListing(this.items);
+      this.$router.push({ name: "Home" });
     },
   },
 };
