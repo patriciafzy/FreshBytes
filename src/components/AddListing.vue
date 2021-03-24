@@ -10,14 +10,14 @@
         value="Produce"
         v-model="item.category"
       />
-      <label for="uglyfood">"Ugly" Food</label>
+      <label for="uglyfood"> "Ugly" Food </label>
       <input
         type="radio"
         id="product"
-        value="product"
+        value="Product"
         v-model="item.category"
       />
-      <label for="product">Product</label>
+      <label for="product"> Product </label>
 
       <br />
       <label class="title is-6" for="name">Name of Product</label><br />
@@ -93,6 +93,16 @@
       />
       <label for="pickup"> Pickup</label><br />
 
+      <label class="title is-6" for="location"> Location</label><br />
+      <input type="radio" id="North" value="North" v-model="item.location" />
+      <label for="North"> North </label>
+      <input type="radio" id="South" value="South" v-model="item.location" />
+      <label for="South"> South </label>
+      <input type="radio" id="West" value="West" v-model="item.location" />
+      <label for="West"> West </label>
+      <input type="radio" id="East" value="East" v-model="item.location" />
+      <label for="East"> East </label><br />
+
       <!-- Add image !-->
       <label class="title is-6" for="image-upload"
         >Upload a display image: </label
@@ -161,6 +171,7 @@ export default {
         pickup: false,
         removed: false,
         dietary: [],
+        location: "",
       },
       dietaryRestrictions: [
         "None",

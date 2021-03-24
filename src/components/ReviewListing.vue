@@ -13,6 +13,8 @@
     <p>Delivery Options:</p>
     <p>Delivery: {{ items.delivery }}</p>
     <p>Pick up: {{ items.pickup }}</p>
+    <br />
+    <p>Location: {{ items.location }}</p>
     <p>Dietary Restriction: {{ items.dietary.join() }}</p>
 
     <button type="button" v-on:click="$router.go(-1)">Modify Listing</button>
