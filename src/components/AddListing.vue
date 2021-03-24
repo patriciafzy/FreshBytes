@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1>Add a Listing</h1>
+    <h1 class="title is-3">Add a Listing</h1>
     <form>
-      <label>What type of product do you wish to list?</label><br />
+      <label class="title is-6">What type of product do you wish to list?</label
+      ><br />
       <input
         type="radio"
         id="uglyfood"
@@ -19,7 +20,7 @@
       <label for="product">Product</label>
 
       <br />
-      <label for="name">Name of Product</label><br />
+      <label class="title is-6" for="name">Name of Product</label><br />
       <textarea
         v-model.trim.lazy="item.name"
         row="10"
@@ -28,7 +29,7 @@
       ></textarea
       ><br />
 
-      <label for="description">Description</label><br />
+      <label class="title is-6" for="description">Description</label><br />
       <textarea
         v-model.trim.lazy="item.description"
         placeholder="Enter a description about the product's condition."
@@ -38,7 +39,7 @@
       ></textarea
       ><br />
 
-      <label for="expiry">Best Before:</label><br />
+      <label class="title is-6" for="expiry">Best Before:</label><br />
       <input
         type="date"
         v-model="item.expiryDate"
@@ -48,7 +49,8 @@
         required
       /><br />
 
-      <label for="originalPrice">Original Price:</label><br />
+      <label class="title is-6" for="originalPrice">Original Price:</label
+      ><br />
       <textarea
         v-model.number="item.originalPrice"
         placeholder="SGD ($)"
@@ -56,7 +58,7 @@
       ></textarea
       ><br />
 
-      <label for="price">New Price:</label><br />
+      <label class="title is-6" for="price">New Price:</label><br />
       <textarea
         v-model.number="item.price"
         placeholder="SGD ($)"
@@ -64,10 +66,10 @@
       ></textarea
       ><br />
 
-      <label for="quantity">Quantity Available:</label><br />
+      <label class="title is-6" for="quantity">Quantity Available:</label><br />
       <textarea v-model.number="item.quantity" required></textarea><br />
 
-      <label for="dietary">Dietary Restriction</label><br />
+      <label class="title is-6" for="dietary">Dietary Restriction</label><br />
       <select v-model="item.dietary" multiple required>
         <option v-for="option in dietaryRestrictions" v-bind:key="option">
           {{ option }}
@@ -75,15 +77,26 @@
       </select>
       <br />
 
-      <label for="delivery">Delivery Option</label><br />
-      <select v-model="item.delivery" multiple required>
-        <option>Self Pick-Up</option>
-        <option>Delivery</option>
-      </select>
-      <br />
+      <label class="title is-6" for="deliverys">Delivery Option</label><br />
+      <input
+        type="checkbox"
+        id="delivery"
+        v-bind:value="true"
+        v-model="item.delivery"
+      />
+      <label for="delivery"> Delivery</label><br />
+      <input
+        type="checkbox"
+        id="pickup"
+        v-bind:value="true"
+        v-model="item.pickup"
+      />
+      <label for="pickup"> Pickup</label><br />
 
       <!-- Add image !-->
-      <label for="image-upload">Upload a display image: </label><br />
+      <label class="title is-6" for="image-upload"
+        >Upload a display image: </label
+      ><br />
       <div class="image-upload">
         <image-uploader
           :preview="true"
@@ -144,7 +157,8 @@ export default {
         price: null,
         picture: null,
         quantity: null,
-        delivery: [],
+        delivery: false,
+        pickup: false,
         removed: false,
         dietary: [],
       },

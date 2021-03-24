@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Review Listing</h4>
+    <h1 class="title is-4">Review Listing</h1>
     <img v-bind:src="items.picture" />
     <p>Name: {{ items.name }}</p>
     <p>Description: {{ items.description }}</p>
@@ -9,7 +9,10 @@
     <p>Original Price: ${{ items.originalPrice }}</p>
     <p>Listed Price : ${{ items.price }}</p>
     <p>Quantity: {{ items.quantity }}</p>
-    <p>Delivery Options: {{ items.delivery.join() }}</p>
+    <br />
+    <p>Delivery Options:</p>
+    <p>Delivery: {{ items.delivery }}</p>
+    <p>Pick up: {{ items.pickup }}</p>
     <p>Dietary Restriction: {{ items.dietary.join() }}</p>
 
     <button type="button" v-on:click="$router.go(-1)">Modify Listing</button>
