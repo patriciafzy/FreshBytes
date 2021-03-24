@@ -20,14 +20,6 @@
       id="dashboard"
       >Statistics</a
     >
-    <a
-      v-bind:class="{ active: isActive.listing }"
-      v-if="userType == 'business'"
-      href="#addlisting"
-      v-on:click="swap"
-      id="listing"
-      >Add Listing</a
-    >
   </div>
 </template>
 
@@ -39,12 +31,8 @@ export default {
         details: true,
         orders: false,
         dashboard: false,
-        listing: false,
       },
     };
-  },
-  props: {
-    userType: String,
   },
   methods: {
     /**
