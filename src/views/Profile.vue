@@ -1,10 +1,7 @@
 <template>
   <div v-if="userDetails">
     <h1 class="title is-3">{{ userDetails.name }}'s Profile Page</h1>
-    <side-bar
-      v-on:change-profile="changeDetails"
-      v-bind:userType="userType"
-    ></side-bar>
+    <side-bar v-on:change-profile="changeDetails"></side-bar>
     <div id="content">
       <user-details
         v-bind:userDetails="userDetails"
@@ -15,9 +12,6 @@
         v-bind:allOrders="allOrders"
         v-if="toShow.orders"
       ></order-details>
-      <add-listing
-        v-if="userType == 'business' && toShow.listing"
-      ></add-listing>
     </div>
   </div>
 </template>
@@ -26,7 +20,6 @@
 import SideBar from "../components/SideBar.vue";
 import OrderDetails from "../components/OrderDetails.vue";
 import UserDetails from "../components/UserDetails.vue";
-import AddListing from "../components/AddListing.vue";
 import {
   getUserDetails,
   getUserType,
@@ -43,7 +36,6 @@ export default {
         details: true,
         orders: false,
         dashboard: false,
-        listing: false,
       },
       userId: String,
     };
@@ -62,7 +54,6 @@ export default {
     SideBar,
     UserDetails,
     OrderDetails,
-    AddListing,
   },
   created: function () {
     const username = this.$store.getters.getUsername;

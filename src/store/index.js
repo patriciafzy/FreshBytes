@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     isLoggedIn: false,
     userData: {
       username: "",
+      isCustomer: null,
     },
     products: [],
   },
@@ -64,6 +65,9 @@ const store = new Vuex.Store({
     },
     getUsername: function (state) {
       return state.userData.username;
+    },
+    getUserType: function (state) {
+      return state.userData.isCustomer;
     },
   },
   modules: {},
