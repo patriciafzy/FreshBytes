@@ -12,6 +12,7 @@ const store = new Vuex.Store({
       isCustomer: null,
     },
     products: [],
+    cart: [],
   },
   mutations: {
     setCategories: function (state, val) {
@@ -27,6 +28,26 @@ const store = new Vuex.Store({
     logout: function (state) {
       state.isLoggedIn = false;
       state.userData = {};
+    },
+    addToCart(state, { id }) {
+      const record = state.cart.find((p) => p.id === id);
+      if (!record) {
+        state.cart.push({
+          id,
+          quantity: 1,
+        });
+      } else {
+        record.quantity++;
+      }
+    },
+    setQuantity(state, { id, value }) {
+      const record = state.cart.find((p) => p.id === id);
+      record.quantity = value;
+    },
+    removeFromCart(state, { id }) {
+      const index = state.cart.findIndex((p) => p.id === id);
+      console.log(state.cart);
+      state.cart.splice(index, 1);
     },
   },
   actions: {
@@ -50,6 +71,9 @@ const store = new Vuex.Store({
           }
         });
     },
+    addToCart(context, id) {
+      context.commit("addToCart", { id: id });
+    },
   },
   getters: {
     categories: function (state) {
@@ -59,6 +83,20 @@ const store = new Vuex.Store({
       return (id) => {
         return state.products.filter((p) => p[0] === id);
       };
+    },
+    cart: function (state) {
+      return state.cart.map(({ id, quantity }) => {
+        const product = state.products.find((p) => p[0] === id);
+        return {
+          id: product[0],
+          name: product[1].name,
+          price: product[1].price,
+          originalPrice: product[1].originalPrice,
+          picture: product[1].picture,
+          stockQuantity: product[1].quantity,
+          quantity,
+        };
+      });
     },
     isLoggedIn: function (state) {
       return state.isLoggedIn;

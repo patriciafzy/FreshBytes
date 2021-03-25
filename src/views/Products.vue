@@ -27,6 +27,13 @@
           >
             More Info
           </button>
+          <button
+            class="product-title"
+            v-bind:id="product[0]"
+            v-on:click.prevent="addToCart($event)"
+          >
+            Add to Cart
+          </button>
         </li>
       </ul>
     </section>
@@ -63,6 +70,10 @@ export default {
     route: function (event) {
       this.id = event.target.getAttribute("id");
       this.$router.push({ name: "product", params: { id: this.id } });
+    },
+    addToCart: function (event) {
+      this.id = event.target.getAttribute("id");
+      this.$store.dispatch("addToCart", this.id);
     },
   },
 };

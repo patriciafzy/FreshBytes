@@ -5,7 +5,8 @@
         <router-link to="/">Home</router-link> |
         <router-link :to="{ name: 'products' }">Products</router-link> |
         <router-link :to="{ name: 'profile' }">Profile</router-link> |
-        <router-link :to="{ name: 'about' }">About</router-link>
+        <router-link :to="{ name: 'about' }">About</router-link> |
+        <router-link :to="{ name: 'cart' }">Cart</router-link>
         <router-link v-if="isBusiness" :to="{ name: 'addListing' }">
           | Add Listing</router-link
         >
