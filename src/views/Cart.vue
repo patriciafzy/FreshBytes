@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div v-for="product in products" :key="product">
+    <div v-for="product in products" :key="product.id">
       <basket v-bind:product="product"></basket>
     </div>
     <section class="section is-medium">
