@@ -46,7 +46,6 @@ const store = new Vuex.Store({
     },
     removeFromCart(state, { id }) {
       const index = state.cart.findIndex((p) => p.id === id);
-      console.log(state.cart);
       state.cart.splice(index, 1);
     },
   },
