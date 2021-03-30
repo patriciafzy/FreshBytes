@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import db from "../database/firebase.js";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
-var ls = new SecureLS({ isCompression: false });
+const ls = new SecureLS({ isCompression: false });
 
 Vue.use(Vuex);
 

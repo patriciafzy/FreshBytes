@@ -180,3 +180,7 @@ export function getImageUrl(baseUrl, imageName, folderName) {
     );
   });
 }
+
+export function addCustomer(customerData) {
+  return database.collection("customers").add(customerData);
+}

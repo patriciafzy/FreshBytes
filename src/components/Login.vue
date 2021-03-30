@@ -22,6 +22,13 @@
       <b-button type="is-primary" rounded expanded v-on:click="login"
         >Login</b-button
       >
+      <b-button
+        type="is-info"
+        rounded
+        expanded
+        v-on:click="() => this.$router.push({ name: 'signup' })"
+        >Signup</b-button
+      >
     </div>
   </div>
 </template>
@@ -54,4 +61,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+button {
+  margin-top: 5px;
+}
+</style>

@@ -1,10 +1,8 @@
 <template>
   <div class="home">
     <h1 class="title is-1"><i>FreshBytes</i></h1>
-    <!-- <button v-on:click="toggleLogin">Toggle Login</button>
-    <h4>{{ isLoggedIn }}</h4> -->
     <login v-if="!isLoggedIn" />
-    <div v-else>
+    <div v-if="isLoggedIn">
       <h1 class="title is-3">Welcome {{ getUsername }}!</h1>
       <b-button class="is-primary" rounded v-on:click="logout">Logout</b-button>
     </div>

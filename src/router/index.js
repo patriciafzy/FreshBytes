@@ -7,6 +7,7 @@ import Product from "../components/Product.vue";
 import Cart from "../views/Cart.vue";
 import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
+import Signup from "../views/Signup.vue";
 import store from "../store/index.js";
 
 Vue.use(VueRouter);
@@ -14,7 +15,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home,
   },
   {
@@ -57,6 +58,11 @@ const routes = [
     name: "cart",
     component: Cart,
   },
+  {
+    path: "/signup",
+    name: "signup",
+    component: Signup,
+  },
 ];
 
 const router = new VueRouter({
@@ -65,7 +71,7 @@ const router = new VueRouter({
   routes,
 });
 
-// Protected Routes
+// Protected Routes - Only can access on Login
 const loginGuard = [
   "profile",
   "products",
@@ -75,9 +81,18 @@ const loginGuard = [
   "cart",
 ];
 
+// Protected Routes - Only can access on Logout
+const logoutGuard = ["signup"];
+
 router.beforeEach((to, from, next) => {
   if (!loginGuard.includes(to.name) || store.getters.isLoggedIn) return next();
-  return next({ name: "Home" });
+  return next({ name: "home" });
+});
+
+router.beforeEach((to, from, next) => {
+  if (!logoutGuard.includes(to.name) || !store.getters.isLoggedIn)
+    return next();
+  return next({ name: "home" });
 });
 
 export default router;
