@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Products from "../views/Products.vue";
 import Product from "../components/Product.vue";
+import Cart from "../views/Cart.vue";
 import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
 import store from "../store/index.js";
@@ -51,6 +52,11 @@ const routes = [
     component: ReviewListing,
     props: true,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
+  },
 ];
 
 const router = new VueRouter({
@@ -66,6 +72,7 @@ const loginGuard = [
   "product",
   "addListing",
   "reviewListing",
+  "cart",
 ];
 
 router.beforeEach((to, from, next) => {

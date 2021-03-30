@@ -5,7 +5,11 @@
         <router-link to="/">Home</router-link> |
         <router-link :to="{ name: 'products' }">Products</router-link> |
         <router-link :to="{ name: 'profile' }">Profile</router-link> |
-        <router-link :to="{ name: 'about' }">About</router-link>
+        <router-link :to="{ name: 'about' }">About</router-link> |
+        <router-link :to="{ name: 'cart' }">Cart</router-link>
+        <router-link v-if="isBusiness" :to="{ name: 'addListing' }">
+          | Add Listing</router-link
+        >
       </div>
       <div v-else>
         <router-link to="/">Home</router-link> |
@@ -21,6 +25,9 @@ export default {
   computed: {
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
+    },
+    isBusiness: function () {
+      return !this.$store.getters.getUserType;
     },
   },
 };

@@ -20,10 +20,8 @@
           <h4>Other Details:</h4>
           <ul>
             <p>Expiry Date: {{ product[1].expiryDate }}</p>
-            <p>Delivery Options: {{ product[1].delivery[0] }}</p>
-            <p v-if="product[1].delivery[1]">
-              and {{ product[1].delivery[1] }}
-            </p>
+            <p>Available for Delivery: {{ product[1].delivery }}</p>
+            <p>Available for Pick Up: {{ product[1].pickup }}</p>
           </ul>
         </div>
       </div>

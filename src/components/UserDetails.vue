@@ -2,42 +2,26 @@
   <div id="userDet">
     <h1 class="title is-5">Your User Details</h1>
     <div v-if="!isEdit">
-      <p>Name: {{ this.userDetails.name }}</p>
-      <p>Email: {{ this.userDetails.email }}</p>
-      <p>Username: {{ this.userDetails.username }}</p>
-      <p>Points: {{ this.userDetails.points }}</p>
-      <p>Location: {{ this.userDetails.location }}</p>
-      <button type="button" v-on:click="toggleForm">Change Details</button>
+      <user-details-list
+        v-bind:userDetails="userDetails"
+        v-bind:isCustomer="isCustomer"
+      ></user-details-list>
+      <b-button v-on:click="toggleForm">Update Details</b-button>
     </div>
     <div v-if="isEdit">
-      <form action="">
-        <label for="name">Name: </label>
-        <input type="text" name="name" v-bind:value="userDetails.name" />
-        <label for="email">Email: </label>
-        <input type="email" name="email" v-bind:value="userDetails.email" />
-        <label for="username">Username: </label>
-        <input
-          type="text"
-          name="username"
-          v-bind:value="userDetails.username"
-        />
-        <label for="location">Location: </label>
-        <select name="location" v-bind:value="userDetails.location">
-          <option value="North">North</option>
-          <option value="South">South</option>
-          <option value="East">East</option>
-          <option value="West">West</option>
-        </select>
-        <div class="buttons">
-          <button type="button" v-on:click="toggleForm">Cancel Changes</button>
-          <button type="submit">Submit Not Done D:</button>
-        </div>
-      </form>
+      <user-details-form
+        v-bind:userDetails="userDetails"
+        v-bind:isCustomer="isCustomer"
+        v-bind:userId="userId"
+      ></user-details-form>
+      <b-button v-on:click="toggleForm">Cancel Changes</b-button>
     </div>
   </div>
 </template>
 
 <script>
+import UserDetailsList from "../components/UserDetailsList.vue";
+import UserDetailsForm from "../components/UserDetailsForm.vue";
 export default {
   data() {
     return {
@@ -46,6 +30,8 @@ export default {
   },
   props: {
     userDetails: Object,
+    isCustomer: Boolean,
+    userId: String,
   },
   computed: {
     userData: function () {
@@ -57,6 +43,10 @@ export default {
       this.isEdit = !this.isEdit;
     },
   },
+  components: {
+    UserDetailsList,
+    UserDetailsForm,
+  },
 };
 </script>
 
@@ -67,26 +57,8 @@ export default {
   padding: 10px;
 }
 
-p,
-label {
-  font-weight: bold;
-  margin-left: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.buttons {
+button {
   margin: 20px;
   display: block;
-}
-
-span,
-input,
-select {
-  font-weight: normal;
-  margin-left: 20px;
 }
 </style>

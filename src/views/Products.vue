@@ -15,7 +15,7 @@
           <img :src="product[1].picture" height="200px" /><br />
           <p class="product-title">{{ product[1].name }}</p>
           <p>
-            <i>${{ product[1].price }}</i>
+            <i>${{ product[1].price.toFixed(2) }}</i>
           </p>
           <p>
             <i>Description: {{ product[1].description }}</i>
@@ -27,15 +27,27 @@
           >
             More Info
           </button>
+          <button
+            class="product-title"
+            v-bind:id="product[0]"
+            v-on:click.prevent="
+              addToCart($event);
+              toggleSideBarCart();
+            "
+          >
+            Add to Cart
+          </button>
         </li>
       </ul>
     </section>
+    <sidebar-cart ref="sidebar"></sidebar-cart>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
+import SidebarCart from "../components/SidebarCart.vue";
 
 export default {
   data() {
@@ -64,6 +76,16 @@ export default {
       this.id = event.target.getAttribute("id");
       this.$router.push({ name: "product", params: { id: this.id } });
     },
+    addToCart: function (event) {
+      this.id = event.target.getAttribute("id");
+      this.$store.dispatch("addToCart", this.id);
+    },
+    toggleSideBarCart: function () {
+      this.$refs.sidebar.toggleBasket();
+    },
+  },
+  components: {
+    SidebarCart,
   },
 };
 </script>
