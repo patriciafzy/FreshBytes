@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="title is-1"><i>FreshBytes</i></h1>
+    <img src="../assets/img/freshbytes.png" height="400px" width="400px" />    
     <!-- <button v-on:click="toggleLogin">Toggle Login</button>
     <h4>{{ isLoggedIn }}</h4> -->
     <login v-if="!isLoggedIn" />
