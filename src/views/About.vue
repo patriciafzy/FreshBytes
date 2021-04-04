@@ -5,10 +5,13 @@
       <div class="column is-half">
         <img src="../assets/img/aboutus1.png" height="400px" width="400px" />
       </div>
-      <div class="column is-one-quarter"><br><br><br><br><br>
-        <h1 class="title is-2">Less Waste, Better Taste</h1><p>
-          We connect you to F&B businesses and local supermarket who have fresh but
-          excess meals or products for sale and consumption at discounted rates.
+      <div class="column is-one-quarter">
+        <br /><br /><br /><br /><br />
+        <h1 class="title is-2">Less Waste, Better Taste</h1>
+        <p>
+          We connect you to F&B businesses and local supermarket who have fresh
+          but excess meals or products for sale and consumption at discounted
+          rates.
         </p>
         <p>
           We believe that every meal saved is a step closer towards saving our
@@ -18,16 +21,18 @@
     </div>
     <div class="columns is-gapless is-multiline is-mobile">
       <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"><br><br><br><br><br><br>
+      <div class="column is-one-quarter">
+        <br /><br /><br /><br /><br /><br />
         <p>
-          Food waste is one of the biggest waste streams in Singapore and the amount
-          of food waste generated has grown by around
+          Food waste is one of the biggest waste streams in Singapore and the
+          amount of food waste generated has grown by around
           <b>20% over the last 10 years.</b>
-        </p><br>
+        </p>
+        <br />
         <p>
-          In 2019, Singapore generated around 744 million kg of food waste. That is
-          equivalent to 2 bowls of rice per person per day, or around 51,000 double
-          decker buses.
+          In 2019, Singapore generated around 744 million kg of food waste. That
+          is equivalent to 2 bowls of rice per person per day, or around 51,000
+          double decker buses.
         </p>
       </div>
       <div class="column is-half">
@@ -51,6 +56,8 @@
         <img src="../assets/img/erica.jpeg" height="400px" width="400px" />
         <p><b>Erica</b></p>
       </li>
+    </ul>
+    <ul>
       <li>
         <img src="../assets/img/patricia.jpeg" height="400px" width="400px" />
         <p><b>Patricia</b></p>
