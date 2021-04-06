@@ -9,6 +9,7 @@ import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
 import Signup from "../views/Signup.vue";
 import store from "../store/index.js";
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,11 @@ const routes = [
     name: "signup",
     component: Signup,
   },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
 ];
 
 const router = new VueRouter({
@@ -82,7 +88,7 @@ const loginGuard = [
 ];
 
 // Protected Routes - Only can access on Logout
-const logoutGuard = ["signup"];
+const logoutGuard = ["signup", "login"];
 
 router.beforeEach((to, from, next) => {
   if (!loginGuard.includes(to.name) || store.getters.isLoggedIn) return next();

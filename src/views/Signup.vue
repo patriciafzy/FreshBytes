@@ -1,6 +1,7 @@
 <template>
   <div class="columns is-centered">
-    <div class="column is-narrow">
+    <div class="column is-narrow signup">
+      <img src="../assets/img/freshbytes.png" height="300px" width="300px" />
       <h1 class="title is-3">Sign Up</h1>
       <div v-if="!customer && !business">
         <b-button
@@ -49,6 +50,10 @@ export default {
 </script>
 
 <style scoped>
+.signup {
+  margin-top: 20px;
+}
+
 button {
   margin-top: 5px;
 }

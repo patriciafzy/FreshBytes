@@ -1,27 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <div v-if="isLoggedIn">
-        <router-link to="/">Home</router-link> |
-        <router-link :to="{ name: 'products' }">Products</router-link> |
-        <router-link :to="{ name: 'profile' }">Profile</router-link> |
-        <router-link :to="{ name: 'about' }">About</router-link> |
-        <router-link :to="{ name: 'cart' }">Cart</router-link>
-        <router-link v-if="isBusiness" :to="{ name: 'addListing' }">
-          | Add Listing</router-link
-        >
-      </div>
-      <div v-else>
-        <router-link to="/">Home</router-link> |
-        <router-link :to="{ name: 'about' }">About</router-link>
-      </div>
-    </div>
+    <nav-bar-component></nav-bar-component>
     <router-view />
   </div>
 </template>
 
 <script>
+import NavBarComponent from "./components/NavBar/NavBarComponent";
+
 export default {
+  components: {
+    NavBarComponent,
+  },
   computed: {
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;

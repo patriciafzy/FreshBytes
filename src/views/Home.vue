@@ -1,15 +1,9 @@
 <template>
   <div class="home">
     <img src="../assets/img/freshbytes.png" height="400px" width="400px" />
-    <!-- <button v-on:click="toggleLogin">Toggle Login</button>
-    <h4>{{ isLoggedIn }}</h4> -->
-    <section class="section is-small">
-      <login v-if="!isLoggedIn" />
-      <div v-else>
-        <h1 class="title is-3">Welcome {{ getUsername }}!</h1>
-        <!-- <b-button class="is-primary" rounded v-on:click="logout">Logout</b-button> -->
-      </div>
-    </section>
+    <div v-if="isLoggedIn">
+      <h1 class="title is-3">Welcome {{ getUsername }}!</h1>
+    </div>
     <section class="section is-small">
       <div>
         <b-carousel>
@@ -31,21 +25,14 @@
 </template>
 
 <script>
-import Login from "../components/Login.vue";
 import slide1 from "../assets/img/slide1.png";
 import slide2 from "../assets/img/slide2.png";
 
 export default {
   name: "Home",
-  components: {
-    Login,
-  },
   methods: {
     toggleLogin: function () {
       this.$store.commit("toggleLogin");
-    },
-    logout: function () {
-      this.$store.commit("logout");
     },
   },
   computed: {
