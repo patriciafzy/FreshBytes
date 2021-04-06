@@ -1,6 +1,7 @@
 <template>
   <div class="columns is-centered">
     <div class="column is-narrow">
+      <img src="../assets/img/freshbytes.png" height="300px" width="300px" />
       <h1 class="title is-3">Login</h1>
       <b-field>
         <b-input
@@ -21,13 +22,6 @@
       </b-field>
       <b-button type="is-primary" rounded expanded v-on:click="login"
         >Login</b-button
-      >
-      <b-button
-        type="is-info"
-        rounded
-        expanded
-        v-on:click="() => this.$router.push({ name: 'signup' })"
-        >Signup</b-button
       >
     </div>
   </div>
@@ -52,6 +46,7 @@ export default {
       validateLogin(this.username, this.password).then((result) => {
         if (result) {
           this.$store.commit("login", result);
+          this.$router.push({ name: "Home" });
         } else {
           alert("Invalid username/password!!");
         }

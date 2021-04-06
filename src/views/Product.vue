@@ -3,17 +3,19 @@
     <section class="wrapper">
       <div class="columns">
         <div class="column">
-            <img :src="product[1].picture" />
-            <h1 class="title is-4">{{ product[1].name }}</h1>
-            <h1 class="title is-4">{{ "$" + displayprice }}</h1>
-            <p>
+          <img :src="product[1].picture" />
+          <h1 class="title is-4">{{ product[1].name }}</h1>
+          <h1 class="title is-4">{{ "$" + displayprice }}</h1>
+          <p>
             You will save
             <b> ${{ price }} </b>!
-            </p>
+          </p>
         </div>
-        <div class="column" align="left"><br>
+        <div class="column" align="left">
+          <br />
           <h1 class="title is-5">Item Description</h1>
-          <p>{{ product[1].description }}</p><br><br>
+          <p>{{ product[1].description }}</p>
+          <br /><br />
           <h1 class="title is-5">More Details:</h1>
           <ul>
             <p>Expiry Date: {{ product[1].expiryDate }}</p>
@@ -49,7 +51,7 @@ export default {
       return (this.product[1].originalPrice - this.product[1].price).toFixed(2);
     },
     displayprice: function () {
-      return (this.product[1].price).toFixed(2);
+      return this.product[1].price.toFixed(2);
     },
   },
 };

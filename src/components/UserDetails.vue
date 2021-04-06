@@ -33,6 +33,11 @@ export default {
     isCustomer: Boolean,
     userId: String,
   },
+  computed: {
+    userData: function () {
+      return this.$store.getters.getUserData;
+    },
+  },
   methods: {
     toggleForm: function () {
       this.isEdit = !this.isEdit;

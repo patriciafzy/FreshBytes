@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import db from "../database/firebase.js";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
-var ls = new SecureLS({ isCompression: false });
+const ls = new SecureLS({ isCompression: false });
 
 Vue.use(Vuex);
 
@@ -19,10 +19,7 @@ const store = new Vuex.Store({
   ],
   state: {
     isLoggedIn: false,
-    userData: {
-      username: "",
-      isCustomer: null,
-    },
+    userData: {},
     products: [],
     cart: [],
   },
@@ -111,6 +108,9 @@ const store = new Vuex.Store({
     },
     isLoggedIn: function (state) {
       return state.isLoggedIn;
+    },
+    getUserData: function (state) {
+      return state.userData;
     },
     getUsername: function (state) {
       return state.userData.username;
