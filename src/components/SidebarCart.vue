@@ -17,7 +17,7 @@
         <b-menu>
           <b-menu-list label="Your Cart">
             <div>
-              <div v-for="product in products" :key="product.id">
+              <div v-for="product in getProducts" :key="product.id">
                 <div>
                   <p style="float: left" class="image is-32x32">
                     <img v-bind:src="product.picture" />
@@ -26,10 +26,12 @@
                     <strong> {{ product.name }} </strong>
                   </p>
                   <br />
-                  <p style="float: left">Quantity: {{ product.quantity }}</p>
+                  <p style="float: left">
+                    Quantity: {{ product.cartQuantity }}
+                  </p>
                   <p style="float: right">
                     Total Price: ${{
-                      (product.quantity * product.price).toFixed(2)
+                      computePrice(product.price, product.cartQuantity)
                     }}
                   </p>
                 </div>
@@ -49,8 +51,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   data() {
     return {
@@ -65,16 +65,21 @@ export default {
       this.open = true;
       setTimeout(() => (this.open = false), 1200);
     },
+    computePrice: function (price, quantity) {
+      return (price * quantity).toFixed(2);
+    },
   },
   computed: {
-    ...mapGetters({
-      products: "cart",
-    }),
+    getProducts: function () {
+      return this.$store.getters.getCart;
+    },
     total() {
-      return this.products
-        .reduce((total, p) => {
-          return total + p.price * p.quantity;
-        }, 0)
+      return this.getProducts
+        .map((product) =>
+          this.computePrice(product.price, product.cartQuantity)
+        )
+        .map((price) => parseFloat(price))
+        .reduce((x, y) => x + y)
         .toFixed(2);
     },
   },
