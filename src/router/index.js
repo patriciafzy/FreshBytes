@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Products from "../views/Products.vue";
-import Product from "../components/Product.vue";
+import Product from "../views/Product.vue";
 import Cart from "../views/Cart.vue";
 import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
