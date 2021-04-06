@@ -10,7 +10,7 @@
           <b-carousel-item v-for="slide in slideshow" :key="slide">
             <section :class="`hero is-small`">
               <div class="hero-body has-text-centered">
-                <img :src="slide.img" height="800px" width="800px" />
+                <img :src="slide" height="800px" width="800px" />
               </div>
             </section>
           </b-carousel-item>
@@ -46,7 +46,7 @@ export default {
 
   data() {
     return {
-      slideshow: [{ img: slide1 }, { img: slide2 }],
+      slideshow: [slide1, slide2],
     };
   },
 };

@@ -12,11 +12,13 @@
       <b-navbar-item tag="router-link" :to="{ name: 'about' }">
         About
       </b-navbar-item>
-      <div v-if="isLoggedIn">
-        <b-navbar-item tag="router-link" :to="{ name: 'products' }">
-          Products
-        </b-navbar-item>
-      </div>
+      <b-navbar-item
+        tag="router-link"
+        :to="{ name: 'products' }"
+        v-if="isLoggedIn"
+      >
+        Products
+      </b-navbar-item>
     </template>
     <template #end>
       <div class="buttons" v-if="!isLoggedIn">
@@ -76,5 +78,11 @@ export default {
 <style scoped>
 .navbar {
   padding: 0 20px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.buttons {
+  padding-left: 10px;
 }
 </style>

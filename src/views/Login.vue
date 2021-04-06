@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-centered">
-    <div class="column is-narrow login">
+    <div class="column is-narrow">
       <img src="../assets/img/freshbytes.png" height="300px" width="300px" />
       <h1 class="title is-3">Login</h1>
       <b-field>
@@ -57,10 +57,6 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  margin-top: 20px;
-}
-
 button {
   margin-top: 5px;
 }
