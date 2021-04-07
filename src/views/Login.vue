@@ -46,7 +46,7 @@ export default {
       validateLogin(this.username, this.password).then((result) => {
         if (result) {
           this.$store.commit("login", result);
-          this.$router.push({ name: "Home" });
+          this.$router.push({ name: "home" });
         } else {
           alert("Invalid username/password!!");
         }
