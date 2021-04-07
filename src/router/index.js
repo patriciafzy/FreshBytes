@@ -10,6 +10,7 @@ import ReviewListing from "../components/ReviewListing.vue";
 import Signup from "../views/Signup.vue";
 import store from "../store/index.js";
 import Login from "../views/Login.vue";
+import { DialogProgrammatic as Dialog } from "buefy";
 
 Vue.use(VueRouter);
 
@@ -92,7 +93,19 @@ const logoutGuard = ["signup", "login"];
 
 router.beforeEach((to, from, next) => {
   if (!loginGuard.includes(to.name) || store.getters.isLoggedIn) return next();
-  return next({ name: "home" });
+  else {
+    Dialog.alert({
+      title: "Access Denied",
+      message: "Please login before attempting to access this page.",
+      type: "is-danger",
+      hasIcon: true,
+      icon: "exclamation-circle",
+      iconPack: "fa",
+      ariaRole: "alertdialog",
+      ariaModal: true,
+    });
+    return next({ name: "home" });
+  }
 });
 
 router.beforeEach((to, from, next) => {
