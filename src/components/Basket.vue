@@ -21,7 +21,7 @@
           <div class="level-item has-text-centered">
             <div class="counter" v-on:click="decrement(product)">-</div>
             <div>
-              <p>{{ quantity }}</p>
+              <p>{{ product.cartQuantity }}</p>
             </div>
             <div class="counter" v-on:click="increment(product)">+</div>
           </div>
@@ -45,50 +45,46 @@
 
 <script>
 export default {
-  data() {
-    return {
-      quantity: this.product.quantity,
-    };
-  },
   props: {
     product: Object,
   },
   methods: {
     increment: function (product) {
-      if (this.quantity >= product.stockQuantity) {
+      if (this.product.cartQuantity >= product.quantity) {
         return alert(
           "The maximum number that can be added is " +
-            this.product.stockQuantity +
+            this.product.quantity +
             "!"
         );
       }
-      this.quantity += 1;
-      this.product.quantity = this.quantity;
-      this.product.total = this.product.price * this.product.quantity;
-      this.updateQuantity(this.product, this.quantity);
+      this.product.cartQuantity++;
+      this.product.total = this.product.price * this.product.cartQuantity;
+      this.updateQuantity(this.product, this.product.cartQuantity);
     },
-    decrement: function (product) {
-      this.quantity -= 1;
-      if (this.quantity < 0) {
-        this.quantity = 0;
+    decrement: function () {
+      this.product.cartQuantity -= 1;
+      if (this.product.cartQuantity < 0) {
+        this.product.cartQuantity = 0;
       }
-      this.product.quantity = this.quantity;
-      this.product.total = this.product.price * this.product.quantity;
-      this.updateQuantity(this.product, this.quantity);
-      if (this.quantity == 0) {
-        this.removeItem(product);
+      this.product.total = this.product.price * this.product.cartQuantity;
+      this.updateQuantity();
+      if (this.product.cartQuantity == 0) {
+        this.removeItem(this.product);
       }
     },
-    updateQuantity: function (product, quantity) {
-      this.$store.commit("setQuantity", { id: product.id, value: quantity });
+    updateQuantity: function () {
+      this.$store.commit("setQuantity", {
+        id: this.product.id,
+        newQuantity: this.product.cartQuantity,
+      });
     },
-    removeItem: function (product) {
-      this.$store.commit("removeFromCart", { id: product.id });
+    removeItem: function () {
+      this.$store.commit("removeFromCart", this.product.id);
     },
   },
   computed: {
-    total() {
-      return (this.product.quantity * this.product.price).toFixed(2);
+    total: function () {
+      return (this.product.cartQuantity * this.product.price).toFixed(2);
     },
   },
 };

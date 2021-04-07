@@ -33,7 +33,7 @@ export default {
   methods: {
     sendListing: function () {
       addListing(this.items);
-      this.$router.push({ name: "Home" });
+      this.$router.push({ name: "home" });
     },
   },
 };

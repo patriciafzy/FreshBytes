@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <h1 class="title">Your Cart</h1>
-    <p v-show="!products.length">
+    <p v-show="!getProducts.length">
       <i>Your cart is empty!</i><br />
       <router-link to="/products">Go shopping</router-link>
     </p>
@@ -10,13 +10,13 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Points Earned</p>
-            <p class="title">{{ totalSavings * 10 }}</p>
+            <p class="title">{{ getTotalSavings * 10 }}</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Total Savings</p>
-            <p class="title">${{ totalSavings }}</p>
+            <p class="title">${{ getTotalSavings }}</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
@@ -54,18 +54,18 @@
         </div>
       </div>
     </div>
-    <div v-for="product in products" :key="product.id">
+    <div v-for="product in getProducts" :key="product.id">
       <basket v-bind:product="product"></basket>
     </div>
     <section class="section is-medium">
       <b-field grouped position="is-right">
-        <p><strong> Grand Total: </strong> ${{ total }}</p>
+        <p><strong>Grand Total: </strong> ${{ getTotal }}</p>
       </b-field>
     </section>
 
     <p>
       <b-button
-        v-show="products.length"
+        v-show="getProducts.length"
         type="is-primary"
         rounded
         @click="checkout"
@@ -76,37 +76,46 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import Basket from "../components/Basket.vue";
 
 export default {
+  components: {
+    Basket,
+  },
   computed: {
-    ...mapGetters({
-      products: "cart",
-    }),
-    total() {
-      return this.products
-        .reduce((total, p) => {
-          return total + p.price * p.quantity;
-        }, 0)
-        .toFixed(2);
+    getProducts: function () {
+      console.log(this.$store.getters.getCart);
+      return this.$store.getters.getCart;
     },
-
-    totalSavings() {
-      return this.products
-        .reduce((total, p) => {
-          return total + (p.originalPrice - p.price) * p.quantity;
-        }, 0)
-        .toFixed(2);
+    getTotal: function () {
+      return this.getProducts
+        .map((product) =>
+          this.computePrice(product.price, product.cartQuantity)
+        )
+        .reduce((x, y) => x + y);
+    },
+    getTotalSavings: function () {
+      return this.getProducts
+        .map((product) =>
+          this.computeSavings(
+            product.originalPrice,
+            product.price,
+            product.cartQuantity
+          )
+        )
+        .reduce((x, y) => x + y);
     },
   },
   methods: {
     checkout() {
-      alert("Your total is $" + this.total);
+      alert("Your total is $" + this.getTotal);
     },
-  },
-  components: {
-    Basket,
+    computePrice: function (price, quantity) {
+      return parseFloat((price * quantity).toFixed(2));
+    },
+    computeSavings: function (originalPrice, price, quantity) {
+      return parseFloat(((originalPrice - price) * quantity).toFixed(2));
+    },
   },
 };
 </script>

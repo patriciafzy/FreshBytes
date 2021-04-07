@@ -1,126 +1,67 @@
 <template>
-  <div>
-    <section class="wrapper">
-      <h2 class="title is-2">Featured Items</h2>
-      <br />
-      <div>
-        <input type="text" v-model="search" placeholder="Search title.." />
+  <div class="products">
+    <h2 class="title is-2">Featured Items</h2>
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        <b-input v-model="search" placeholder="Search..."></b-input>
       </div>
-      <ul class="featured-items">
-        <li
-          v-for="product in filteredList"
-          :key="product[1].id"
-          class="productList"
-        >
-          <img :src="product[1].picture" height="200px" /><br />
-          <p class="product-title">{{ product[1].name }}</p>
-          <p>
-            <i>${{ product[1].price.toFixed(2) }}</i>
-          </p>
-          <p>
-            <i>Description: {{ product[1].description }}</i>
-          </p>
-          <button
-            class="product-title"
-            v-bind:id="product[0]"
-            v-on:click.prevent="route($event)"
-          >
-            More Info
-          </button>
-          <button
-            class="product-title"
-            v-bind:id="product[0]"
-            v-on:click.prevent="
-              addToCart($event);
-              toggleSideBarCart();
-            "
-          >
-            Add to Cart
-          </button>
-        </li>
-      </ul>
-    </section>
+    </div>
+    <div class="container">
+      <product-card-component
+        v-for="product in filteredList"
+        :key="product.id"
+        :product="product"
+        v-on:addToCart="toggleSideBarCart"
+      />
+    </div>
     <sidebar-cart ref="sidebar"></sidebar-cart>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { mapGetters } from "vuex";
+import { getProducts } from "../database/queries.js";
+import ProductCardComponent from "../components/Cards/ProductCardComponent.vue";
 import SidebarCart from "../components/SidebarCart.vue";
 
 export default {
+  components: {
+    ProductCardComponent,
+    SidebarCart,
+  },
   data() {
     return {
       search: "",
+      products: [],
     };
   },
-
-  computed: {
-    filteredList() {
-      return this.products.filter((post) => {
-        return post[1].name.toLowerCase().includes(this.search.toLowerCase());
+  created: function () {
+    getProducts().then((snapshot) => {
+      this.products = snapshot.docs.map((doc) => {
+        let data = doc.data();
+        data["id"] = doc.id;
+        return data;
       });
+    });
+  },
+  computed: {
+    filteredList: function () {
+      return this.products.filter((product) =>
+        product.name.toLowerCase().includes(this.search.toLowerCase())
+      );
     },
-
-    products() {
-      return this.$store.state.products;
-    },
-
-    ...mapGetters(["categories"]),
   },
   methods: {
-    ...mapActions(["fetchCatagories"]),
-
-    route: function (event) {
-      this.id = event.target.getAttribute("id");
-      this.$router.push({ name: "product", params: { id: this.id } });
-    },
-    addToCart: function (event) {
-      this.id = event.target.getAttribute("id");
-      this.$store.dispatch("addToCart", this.id);
-    },
     toggleSideBarCart: function () {
       this.$refs.sidebar.toggleBasket();
     },
   },
-  components: {
-    SidebarCart,
-  },
 };
 </script>
 
-<style>
-.wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.featured-items {
-  padding-left: 0;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  flex-flow: row wrap;
-  column-gap: 0.5%;
-}
-
-.product-image {
-  max-height: 200px;
-}
-.product-title {
-  font-weight: bold;
-  color: black;
-}
-
-.productList {
-  width: 100%;
-  margin: 10px;
-  padding: 0 5px;
-  box-sizing: border-box;
-  text-align: center;
-  flex: 1 0 calc(33.333% - 20px);
-  max-width: calc(33.333% - 20px);
+<style scoped>
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1.5em 0.5em;
 }
 </style>

@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import db from "../database/firebase.js";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
 const ls = new SecureLS({ isCompression: false });
@@ -24,9 +23,6 @@ const store = new Vuex.Store({
     cart: [],
   },
   mutations: {
-    setCategories: function (state, val) {
-      state.products = val;
-    },
     toggleLogin: function (state) {
       state.isLoggedIn = !state.isLoggedIn;
     },
@@ -38,49 +34,24 @@ const store = new Vuex.Store({
       state.isLoggedIn = false;
       state.userData = {};
     },
-    addToCart(state, { id }) {
-      const record = state.cart.find((p) => p.id === id);
+    addToCart(state, payload) {
+      const record = state.cart.find((product) => product.id == payload.id);
+      console.log(record);
       if (!record) {
-        state.cart.push({
-          id,
-          quantity: 1,
-        });
+        const product = payload;
+        product.cartQuantity = 1;
+        state.cart.push(product);
       } else {
-        record.quantity++;
+        record.cartQuantity++;
       }
     },
-    setQuantity(state, { id, value }) {
-      const record = state.cart.find((p) => p.id === id);
-      record.quantity = value;
+    setQuantity(state, payload) {
+      const record = state.cart.find((product) => product.id === payload.id);
+      record.cartQuantity = payload.newQuantity;
     },
-    removeFromCart(state, { id }) {
-      const index = state.cart.findIndex((p) => p.id === id);
+    removeFromCart(state, payload) {
+      const index = state.cart.findIndex((product) => product.id === payload);
       state.cart.splice(index, 1);
-    },
-  },
-  actions: {
-    fetchCategories({ commit }) {
-      db.collection("items")
-        .get()
-        .then((querySnapshot) => {
-          if (querySnapshot.empty) {
-            console.log("cannot find");
-            this.$router.push("/HelloWorld");
-          } else {
-            let product = {};
-            this.loading = false;
-            var products = [];
-            querySnapshot.forEach((doc) => {
-              product = [doc.id, doc.data()];
-              products.push(product);
-            });
-
-            commit("setCategories", products);
-          }
-        });
-    },
-    addToCart(context, id) {
-      context.commit("addToCart", { id: id });
     },
   },
   getters: {
@@ -92,19 +63,8 @@ const store = new Vuex.Store({
         return state.products.filter((p) => p[0] === id);
       };
     },
-    cart: function (state) {
-      return state.cart.map(({ id, quantity }) => {
-        const product = state.products.find((p) => p[0] === id);
-        return {
-          id: product[0],
-          name: product[1].name,
-          price: product[1].price,
-          originalPrice: product[1].originalPrice,
-          picture: product[1].picture,
-          stockQuantity: product[1].quantity,
-          quantity,
-        };
-      });
+    getCart: function (state) {
+      return state.cart;
     },
     isLoggedIn: function (state) {
       return state.isLoggedIn;
@@ -122,5 +82,4 @@ const store = new Vuex.Store({
   modules: {},
 });
 
-store.dispatch("fetchCategories");
 export default store;

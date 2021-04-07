@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Products from "../views/Products.vue";
-import Product from "../views/Product.vue";
+// import Product from "../views/Product.vue";
 import Cart from "../views/Cart.vue";
 import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
@@ -39,11 +39,11 @@ const routes = [
     name: "products",
     component: Products,
   },
-  {
-    path: "/products/:id",
-    name: "product",
-    component: Product,
-  },
+  // {
+  //   path: "/products/:id",
+  //   name: "product",
+  //   component: Product,
+  // },
   {
     path: "/addlisting",
     name: "addListing",
