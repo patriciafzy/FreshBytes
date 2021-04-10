@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import CustomerSignup from "../components/Signup/CustomerSignup.vue";
+import CustomerSignup from "../components/signups/CustomerSignup.vue";
 
 export default {
   components: {
