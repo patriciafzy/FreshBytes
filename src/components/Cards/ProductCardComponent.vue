@@ -15,16 +15,34 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a class="card-footer-item">More Info</a>
-      <a class="card-footer-item" v-on:click="addToCart">Add to Cart</a>
+      <a class="card-footer-item" @click="isModalActive = true">More Info</a>
+      <a class="card-footer-item" @click="addToCart">Add to Cart</a>
     </footer>
+    <b-modal v-model="isModalActive" has-modal-card trap-focus>
+      <template>
+        <product-modal-component
+          :product="product"
+          @close="isModalActive = false"
+        />
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import ProductModalComponent from "./ProductModalComponent.vue";
+
 export default {
+  components: {
+    ProductModalComponent,
+  },
   props: {
     product: Object,
+  },
+  data: function () {
+    return {
+      isModalActive: false,
+    };
   },
   computed: {
     getPrice: function () {
