@@ -30,6 +30,9 @@
         </router-link>
       </div>
       <b-navbar-dropdown :label="getUserName" v-else>
+        <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
+          Profile
+        </b-navbar-item>
         <b-navbar-item tag="router-link" :to="{ name: 'cart' }">
           Cart
         </b-navbar-item>

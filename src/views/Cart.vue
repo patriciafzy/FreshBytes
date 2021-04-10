@@ -92,7 +92,7 @@ export default {
         .map((product) =>
           this.computePrice(product.price, product.cartQuantity)
         )
-        .reduce((x, y) => x + y);
+        .reduce((x, y) => x + y, 0);
     },
     getTotalSavings: function () {
       return this.getProducts
@@ -103,7 +103,7 @@ export default {
             product.cartQuantity
           )
         )
-        .reduce((x, y) => x + y);
+        .reduce((x, y) => x + y, 0);
     },
   },
   methods: {
