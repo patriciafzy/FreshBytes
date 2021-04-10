@@ -45,46 +45,53 @@
 
 <script>
 export default {
-  props: {
-    product: Object,
+  props: ["product"],
+  data: function () {
+    return {
+      productData: { ...this.product },
+    };
   },
   methods: {
     increment: function (product) {
-      if (this.product.cartQuantity >= product.quantity) {
+      if (this.productData.cartQuantity >= product.quantity) {
         return alert(
           "The maximum number that can be added is " +
-            this.product.quantity +
+            this.productData.quantity +
             "!"
         );
       }
-      this.product.cartQuantity++;
-      this.product.total = this.product.price * this.product.cartQuantity;
-      this.updateQuantity(this.product, this.product.cartQuantity);
+      this.productData.cartQuantity++;
+      this.productData.total =
+        this.productData.price * this.productData.cartQuantity;
+      this.updateQuantity(this.productData, this.productData.cartQuantity);
     },
     decrement: function () {
-      this.product.cartQuantity -= 1;
-      if (this.product.cartQuantity < 0) {
-        this.product.cartQuantity = 0;
+      this.productData.cartQuantity -= 1;
+      if (this.productData.cartQuantity < 0) {
+        this.productData.cartQuantity = 0;
       }
-      this.product.total = this.product.price * this.product.cartQuantity;
+      this.productData.total =
+        this.productData.price * this.productData.cartQuantity;
       this.updateQuantity();
-      if (this.product.cartQuantity == 0) {
-        this.removeItem(this.product);
+      if (this.productData.cartQuantity == 0) {
+        this.removeItem(this.productData);
       }
     },
     updateQuantity: function () {
       this.$store.commit("setQuantity", {
-        id: this.product.id,
-        newQuantity: this.product.cartQuantity,
+        id: this.productData.id,
+        newQuantity: this.productData.cartQuantity,
       });
     },
     removeItem: function () {
-      this.$store.commit("removeFromCart", this.product.id);
+      this.$store.commit("removeFromCart", this.productData.id);
     },
   },
   computed: {
     total: function () {
-      return (this.product.cartQuantity * this.product.price).toFixed(2);
+      return (this.productData.cartQuantity * this.productData.price).toFixed(
+        2
+      );
     },
   },
 };
