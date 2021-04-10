@@ -20,7 +20,7 @@
 
 <script>
 import { getProducts } from "../database/queries.js";
-import ProductCardComponent from "../components/Cards/ProductCardComponent.vue";
+import ProductCardComponent from "../components/cards/ProductCardComponent.vue";
 import SidebarCart from "../components/SidebarCart.vue";
 
 export default {

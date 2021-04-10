@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Products from "../views/Products.vue";
-// import Product from "../views/Product.vue";
 import Cart from "../views/Cart.vue";
 import AddListing from "../components/AddListing.vue";
 import ReviewListing from "../components/ReviewListing.vue";
@@ -11,6 +10,8 @@ import Signup from "../views/Signup.vue";
 import store from "../store/index.js";
 import Login from "../views/Login.vue";
 import { DialogProgrammatic as Dialog } from "buefy";
+import Listings from "../views/Listings.vue";
+import About from "../views/About.vue";
 
 Vue.use(VueRouter);
 
@@ -23,11 +24,7 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    component: About,
   },
   {
     path: "/profile",
@@ -39,11 +36,6 @@ const routes = [
     name: "products",
     component: Products,
   },
-  // {
-  //   path: "/products/:id",
-  //   name: "product",
-  //   component: Product,
-  // },
   {
     path: "/addlisting",
     name: "addListing",
@@ -69,6 +61,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+  },
+  {
+    path: "/listings",
+    name: "listings",
+    component: Listings,
   },
 ];
 

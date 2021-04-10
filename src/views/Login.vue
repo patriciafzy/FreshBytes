@@ -20,7 +20,7 @@
           icon="lock"
         ></b-input>
       </b-field>
-      <b-button type="is-primary" rounded expanded v-on:click="login"
+      <b-button type="is-primary" rounded expanded @click="login"
         >Login</b-button
       >
     </div>

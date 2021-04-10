@@ -33,8 +33,19 @@
         <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
           Profile
         </b-navbar-item>
-        <b-navbar-item tag="router-link" :to="{ name: 'cart' }">
+        <b-navbar-item
+          tag="router-link"
+          :to="{ name: 'cart' }"
+          v-if="isCustomer"
+        >
           Cart
+        </b-navbar-item>
+        <b-navbar-item
+          tag="router-link"
+          :to="{ name: 'listings' }"
+          v-if="isBusiness"
+        >
+          Listings
         </b-navbar-item>
         <b-navbar-item
           tag="router-link"
@@ -62,17 +73,19 @@ export default {
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
     },
+    isCustomer: function () {
+      return this.$store.getters.isCustomer;
+    },
     isBusiness: function () {
-      return !this.$store.getters.getUserType;
+      return !this.$store.getters.isCustomer;
     },
     getUserName: function () {
-      return this.$store.getters.getUsername;
+      return this.$store.getters.getUserName;
     },
   },
   methods: {
     logout: function () {
       this.$store.commit("logout");
-      this.$router.push({ name: "home" });
     },
   },
 };
