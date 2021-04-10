@@ -27,6 +27,7 @@ const store = new Vuex.Store({
       state.isLoggedIn = !state.isLoggedIn;
     },
     login: function (state, payload) {
+      console.log(payload);
       state.isLoggedIn = true;
       state.userData = payload;
     },
@@ -76,8 +77,11 @@ const store = new Vuex.Store({
     getUsername: function (state) {
       return state.userData.username;
     },
-    getUserType: function (state) {
+    isCustomer: function (state) {
       return state.userData.isCustomer;
+    },
+    getUserName: function (state) {
+      return state.userData.name;
     },
   },
   modules: {},

@@ -20,7 +20,7 @@
 
 <script>
 import { getProducts } from "../database/queries.js";
-import ProductCardComponent from "../components/Cards/ProductCardComponent.vue";
+import ProductCardComponent from "../components/cards/ProductCardComponent.vue";
 import SidebarCart from "../components/SidebarCart.vue";
 
 export default {
@@ -62,6 +62,6 @@ export default {
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 1.5em 0.5em;
+  grid-gap: 0 0.5em;
 }
 </style>

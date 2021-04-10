@@ -6,20 +6,22 @@ export function validateLogin(username, password) {
   console.log(username, password);
   return database
     .collection("users")
-    .doc(username)
+    .where("username", "==", username)
+    .limit(1)
     .get()
     .then((snapshot) => {
-      if (!snapshot.exists) {
+      const user = snapshot.docs[0];
+
+      if (!user.exists) {
         return false;
       }
 
-      const userData = snapshot.data();
+      const userData = user.data();
 
-      if (password != userData.password) {
+      if (userData.password != password) {
         return false;
       }
 
-      userData.username = username;
       return userData;
     });
 }
@@ -187,4 +189,8 @@ export function addCustomer(customerData) {
 
 export function getProducts() {
   return database.collection("items").get();
+}
+
+export function getListings(username) {
+  return database.collection("items").where("business", "==", username).get();
 }
