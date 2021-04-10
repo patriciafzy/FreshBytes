@@ -79,7 +79,7 @@ export default {
           this.computePrice(product.price, product.cartQuantity)
         )
         .map((price) => parseFloat(price))
-        .reduce((x, y) => x + y)
+        .reduce((x, y) => x + y, 0)
         .toFixed(2);
     },
   },
