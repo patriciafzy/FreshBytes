@@ -55,4 +55,8 @@ img {
 .content {
   height: 50px;
 }
+
+.card {
+  margin-bottom: 30px;
+}
 </style>
