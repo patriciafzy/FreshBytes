@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../assets/img/freshbytes.png" height="400px" width="400px" />
+    <img src="../assets/img/FreshBytesLogo.png" height="400px" width="400px" />
     <div v-if="isLoggedIn">
       <h1 class="title is-3">Welcome {{ getUsername }}!</h1>
     </div>

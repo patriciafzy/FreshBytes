@@ -38,6 +38,7 @@ import UserDetails from "../UserDetails.vue";
 import ProfilePic from "../../assets/img/profile.png";
 import { getUserOrdersWithListing } from "../../database/queries";
 
+
 export default {
   components: {
     SideBar,
