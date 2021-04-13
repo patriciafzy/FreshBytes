@@ -87,11 +87,9 @@ export function getUserDetailsDocRef(userId, isCustomer) {
  * @returns A Promise of an array of all order data related to the user ID.
  */
 export function getUserOrdersWithListing(isCustomer, userId) {
-  // collection name
-  const formatUserType = isCustomer ? "customers" : "businesses";
   // field name in order collection
   const orderUserType = isCustomer ? "customer" : "business";
-  const docRef = database.collection(formatUserType).doc(userId);
+  const docRef = database.collection("users").doc(userId);
 
   return database
     .collection("orders")

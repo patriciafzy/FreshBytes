@@ -35,7 +35,6 @@ export default {
         userData.push({ detail: "Points", value: this.userDetails.points });
         userData.push({ detail: "Location", value: this.userDetails.location });
       } else {
-        userData.push({ detail: "Address", value: this.userDetails.address });
         userData.push({
           detail: "Description",
           value: this.userDetails.description,
