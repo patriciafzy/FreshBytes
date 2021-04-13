@@ -206,6 +206,7 @@ export function getProducts() {
   return database.collection("items").get();
 }
 
-export function getListings(username) {
-  return database.collection("items").where("business", "==", username).get();
+export function getListings(userId) {
+  const userDocRef = database.collection("users").doc(userId);
+  return database.collection("items").where("business", "==", userDocRef).get();
 }

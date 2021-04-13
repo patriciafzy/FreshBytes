@@ -39,8 +39,8 @@ export default {
     };
   },
   created: function () {
-    const username = this.$store.getters.getUsername;
-    getListings(username).then((snapshot) => {
+    const id = this.$store.getters.getUserData.id;
+    getListings(id).then((snapshot) => {
       if (snapshot.docs.length == 0) {
         this.isEmpty = true;
         return;
