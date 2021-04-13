@@ -16,7 +16,8 @@ export function validateLogin(username, password) {
         return false;
       }
 
-      const userData = user.data();
+      let userData = user.data();
+      userData.id = user.id;
 
       if (userData.password != password) {
         return false;
@@ -57,6 +58,10 @@ export function getUserDetails(username, isCustomer) {
     .then((snapshot) => {
       return snapshot.docs[0];
     });
+}
+
+export function getDocRef(collection, docId) {
+  return database.collection(collection).get(docId);
 }
 
 /**
