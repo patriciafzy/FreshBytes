@@ -156,8 +156,9 @@ export default {
 
         newOrder["deliveryMode"] = deliveryOptions;
         addOrder(newOrder);
-        this.$store.commit("resetCart");
       }
+
+      this.$store.commit("resetCart");
     },
   },
 };
