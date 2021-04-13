@@ -35,7 +35,7 @@
 import SideBar from "../SideBar.vue";
 import OrderDetails from "../OrderDetails.vue";
 import UserDetails from "../UserDetails.vue";
-import ProfilePic from "../../assets/img/profile.png";
+import ProfilePic from "../../assets/img/profile2.png";
 
 export default {
   components: {

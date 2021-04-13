@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import logo from "../../assets/img/freshbytes.png";
+import logo from "../../assets/img/FreshBytesLogo.png";
 
 export default {
   data: function () {
