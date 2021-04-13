@@ -1,9 +1,6 @@
 <template>
   <div>
-    This is a customer profile page that is tempoarily broken.... Error 404 that
-    kind of stuff.
-  </div>
-  <!-- <section class="hero is-small">
+    <section class="hero is-small">
       <div class="hero-body">
         <img :src="ProfilePic" />
         <p class="title">
@@ -11,8 +8,6 @@
         </p>
       </div>
     </section>
-
-    <div id="empty"></div>
 
     <div class="columns">
       <div class="column is-2">
@@ -32,54 +27,50 @@
           ></order-details>
         </div>
       </div>
-    </div> -->
+    </div>
+  </div>
 </template>
 
 <script>
-// import SideBar from "../components/SideBar.vue";
-// import OrderDetails from "../components/OrderDetails.vue";
-// import UserDetails from "../components/UserDetails.vue";
-// import {
-//   getUserDetails,
-//   getUserOrdersWithListing,
-// } from "../database/queries.js";
-// import ProfilePic from "../assets/img/profile.png";
+import SideBar from "../SideBar.vue";
+import OrderDetails from "../OrderDetails.vue";
+import UserDetails from "../UserDetails.vue";
+import ProfilePic from "../../assets/img/profile.png";
 
-// export default {
-//   data() {
-//     return {
-//       userDetails: {},
-//       isCustomer: Boolean,
-//       allOrders: [],
-//       toShow: {
-//         details: true,
-//         orders: false,
-//         dashboard: false,
-//       },
-//       userId: String,
-//       ProfilePic: ProfilePic,
-//     };
-//   },
-//   methods: {
-//     /**
-//      * Changes the displayed element in the profile page based on a click on the sidebar
-//      */
-//     changeDetails: function (event) {
-//       for (const property in this.toShow) {
-//         this.toShow[property] = property == event ? true : false;
-//       }
-//     },
-//   },
-//   components: {
-//     BusinessProfileComponent,
-//     CustomerProfileComponent,
-//   },
-//   computed: {
-//     isCustomer: function () {
-//       return this.$store.getters.isCustomer;
-//     },
-//   },
-// };
+export default {
+  components: {
+    SideBar,
+    OrderDetails,
+    UserDetails,
+  },
+  data() {
+    return {
+      allOrders: [],
+      toShow: {
+        details: true,
+        orders: false,
+        dashboard: false,
+      },
+      userId: String,
+      ProfilePic: ProfilePic,
+    };
+  },
+  methods: {
+    /**
+     * Changes the displayed element in the profile page based on a click on the sidebar
+     */
+    changeDetails: function (event) {
+      for (const property in this.toShow) {
+        this.toShow[property] = property == event ? true : false;
+      }
+    },
+  },
+  computed: {
+    userDetails: function () {
+      return this.$store.getters.getUserData;
+    },
+  },
+};
 </script>
 
 <style scoped>

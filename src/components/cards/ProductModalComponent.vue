@@ -27,7 +27,7 @@
         <p>Available for Pick Up: {{ product.pickup }}</p>
       </div>
       <footer class="modal-card-footer">
-        <b-button class="is-primary">Add to Cart</b-button>
+        <b-button class="is-primary" @click="addToCart">Add to Cart</b-button>
       </footer>
     </div>
   </div>
@@ -50,6 +50,12 @@ export default {
     },
     priceSaved: function () {
       return (this.product.originalPrice - this.product.price).toFixed(2);
+    },
+  },
+  methods: {
+    addToCart: function () {
+      this.$emit("addToCart");
+      this.$emit("close");
     },
   },
 };

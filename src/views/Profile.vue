@@ -14,6 +14,11 @@ export default {
     BusinessProfileComponent,
     CustomerProfileComponent,
   },
+  computed: {
+    isCustomer: function () {
+      return this.$store.getters.isCustomer;
+    },
+  },
 };
 </script>
 

@@ -23,6 +23,7 @@
         <product-modal-component
           :product="product"
           @close="isModalActive = false"
+          @addToCart="addToCart"
         />
       </template>
     </b-modal>
