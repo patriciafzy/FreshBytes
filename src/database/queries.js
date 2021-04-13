@@ -61,7 +61,19 @@ export function getUserDetails(username, isCustomer) {
 }
 
 export function getDocRef(collection, docId) {
-  return database.collection(collection).get(docId);
+  return database.collection(collection).doc(docId);
+}
+
+export function addOrder(order) {
+  return database
+    .collection("orders")
+    .add(order)
+    .then(() => {
+      console.log("Success");
+    })
+    .catch(() => {
+      console.error("Failure");
+    });
 }
 
 /**
@@ -75,7 +87,7 @@ export function getDocRef(collection, docId) {
  */
 export function getUserDetailsDocRef(userId, isCustomer) {
   const formatUserType = isCustomer ? "customers" : "businesses";
-  return database.collection(formatUserType).doc(userId);
+  return database.collection(formatUserType).get(userId);
 }
 
 /**

@@ -77,6 +77,7 @@
 
 <script>
 import Basket from "../components/Basket.vue";
+import { addOrder, getDocRef } from "../database/queries";
 
 export default {
   components: {
@@ -92,7 +93,8 @@ export default {
         .map((product) =>
           this.computePrice(product.price, product.cartQuantity)
         )
-        .reduce((x, y) => x + y, 0);
+        .reduce((x, y) => x + y, 0)
+        .toFixed(2);
     },
     getTotalSavings: function () {
       return this.getProducts
@@ -108,13 +110,53 @@ export default {
   },
   methods: {
     checkout() {
-      alert("Your total is $" + this.getTotal);
+      this.$buefy.dialog.confirm({
+        title: "Confirm your Order",
+        message: "Your total is $" + this.getTotal,
+        confirmText: "Checkout",
+        type: "is-success",
+        scroll: "keep",
+        trapFocus: false,
+        onConfirm: () => {
+          this.createNewOrder();
+          this.$buefy.toast.open("Order submitted");
+        },
+      });
     },
     computePrice: function (price, quantity) {
       return parseFloat((price * quantity).toFixed(2));
     },
     computeSavings: function (originalPrice, price, quantity) {
       return parseFloat(((originalPrice - price) * quantity).toFixed(2));
+    },
+    createNewOrder: function () {
+      for (let i = 0; i < 1; i++) {
+        let newOrder = {};
+        newOrder["customer"] = getDocRef(
+          "users",
+          this.$store.getters.getUserData.id
+        );
+        newOrder["business"] = this.getProducts[i].business;
+        newOrder["fufilled"] = false;
+        newOrder["listingID"] = getDocRef("items", this.getProducts[i].id);
+        newOrder["quantity"] = this.getProducts[i].cartQuantity;
+
+        let deliveryOptions = "";
+
+        if (this.getProducts[i].delivery) {
+          deliveryOptions += "Delivery";
+        }
+
+        if (this.getProducts[i].pickup) {
+          if (deliveryOptions != "") {
+            deliveryOptions += " / ";
+          }
+          deliveryOptions += "Self Pick-Up";
+        }
+
+        newOrder["deliveryMode"] = deliveryOptions;
+        addOrder(newOrder);
+      }
     },
   },
 };
