@@ -18,7 +18,7 @@
           <user-details
             v-bind:userDetails="userDetails"
             v-bind:isCustomer="isCustomer"
-            v-bind:userId="userId"
+            v-bind:userId="userDetails.id"
             v-if="toShow.details"
           ></user-details>
           <order-details
@@ -35,7 +35,8 @@
 import SideBar from "../SideBar.vue";
 import OrderDetails from "../OrderDetails.vue";
 import UserDetails from "../UserDetails.vue";
-import ProfilePic from "../../assets/img/profile2.png";
+import ProfilePic from "../../assets/img/profile.png";
+import { getUserOrdersWithListing } from "../../database/queries";
 
 export default {
   components: {
@@ -51,7 +52,6 @@ export default {
         orders: false,
         dashboard: false,
       },
-      userId: String,
       ProfilePic: ProfilePic,
     };
   },
@@ -69,13 +69,19 @@ export default {
     userDetails: function () {
       return this.$store.getters.getUserData;
     },
+    isCustomer: function () {
+      return this.$store.getters.isCustomer;
+    },
+  },
+  created: async function () {
+    this.allOrders = await getUserOrdersWithListing(true, this.userDetails.id);
   },
 };
 </script>
 
 <style scoped>
 #content {
-  margin-left: 200px;
+  margin-left: 50px;
   padding: 1px 16px;
 }
 </style>

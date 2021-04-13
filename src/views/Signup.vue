@@ -99,4 +99,13 @@ button {
   border: 3px solid #8c906d;
   border-radius: 20%;
 }
+
+.buttons {
+  max-width: 600px;
+  margin: auto;
+}
+
+.card-image {
+  margin: auto;
+}
 </style>

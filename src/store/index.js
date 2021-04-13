@@ -55,6 +55,9 @@ const store = new Vuex.Store({
       const index = state.cart.findIndex((product) => product.id === payload);
       state.cart.splice(index, 1);
     },
+    resetCart(state) {
+      state.cart = [];
+    },
   },
   getters: {
     categories: function (state) {
