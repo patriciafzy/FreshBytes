@@ -16,7 +16,8 @@ export function validateLogin(username, password) {
         return false;
       }
 
-      const userData = user.data();
+      let userData = user.data();
+      userData.id = user.id;
 
       if (userData.password != password) {
         return false;
@@ -59,6 +60,22 @@ export function getUserDetails(username, isCustomer) {
     });
 }
 
+export function getDocRef(collection, docId) {
+  return database.collection(collection).doc(docId);
+}
+
+export function addOrder(order) {
+  return database
+    .collection("orders")
+    .add(order)
+    .then(() => {
+      console.log("Success");
+    })
+    .catch(() => {
+      console.error("Failure");
+    });
+}
+
 /**
  * Gets the Firestore document reference of a user in either
  * the customer or business collection, depending on the user type
@@ -70,7 +87,7 @@ export function getUserDetails(username, isCustomer) {
  */
 export function getUserDetailsDocRef(userId, isCustomer) {
   const formatUserType = isCustomer ? "customers" : "businesses";
-  return database.collection(formatUserType).doc(userId);
+  return database.collection(formatUserType).get(userId);
 }
 
 /**
@@ -82,11 +99,9 @@ export function getUserDetailsDocRef(userId, isCustomer) {
  * @returns A Promise of an array of all order data related to the user ID.
  */
 export function getUserOrdersWithListing(isCustomer, userId) {
-  // collection name
-  const formatUserType = isCustomer ? "customers" : "businesses";
   // field name in order collection
   const orderUserType = isCustomer ? "customer" : "business";
-  const docRef = database.collection(formatUserType).doc(userId);
+  const docRef = database.collection("users").doc(userId);
 
   return database
     .collection("orders")
