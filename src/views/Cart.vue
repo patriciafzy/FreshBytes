@@ -130,7 +130,7 @@ export default {
       return parseFloat(((originalPrice - price) * quantity).toFixed(2));
     },
     createNewOrder: function () {
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < this.getProducts.length; i++) {
         let newOrder = {};
         newOrder["customer"] = getDocRef(
           "users",
@@ -156,6 +156,7 @@ export default {
 
         newOrder["deliveryMode"] = deliveryOptions;
         addOrder(newOrder);
+        this.$store.commit("resetCart");
       }
     },
   },
