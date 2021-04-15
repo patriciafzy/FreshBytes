@@ -7,6 +7,16 @@
           height="300px"
           width="300px"
         />
+        <div v-if="customer">
+          <h1 class="title is-3">Sign Up</h1>
+          <h1 class="subtitle is-5">Start Shopping with us today!</h1>
+          <customer-signup />
+        </div>
+        <div v-if="business">
+          <h1 class="title is-3">Sign Up</h1>
+          <h1 class="subtitle is-5">Start your business with us today!</h1>
+          <business-signup />
+        </div>
       </div>
     </div>
     <div v-if="!customer && !business">
@@ -46,21 +56,18 @@
         </div>
       </div>
     </div>
-    <div v-if="customer">
-      <h1 class="title is-3">Sign Up</h1>
-      <h1 class="subtitle is-5">Start Shopping with us today!</h1>
-      <customer-signup />
-    </div>
   </div>
 </template>
 
 <script>
 import CustomerSignup from "../components/signups/CustomerSignup.vue";
+import BusinessSignup from "../components/signups/BusinessSignup.vue";
 import BusinessImage from "../assets/designs/businessman.png";
 import CustomerImage from "../assets/designs/shopping.jpeg";
 export default {
   components: {
     CustomerSignup,
+    BusinessSignup,
   },
   data: function () {
     return {

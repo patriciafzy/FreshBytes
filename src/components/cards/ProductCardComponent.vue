@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     getPrice: function () {
-      return "$" + this.product.price.toFixed(2);
+      return "$" + parseFloat(this.product.price).toFixed(2);
     },
   },
   methods: {

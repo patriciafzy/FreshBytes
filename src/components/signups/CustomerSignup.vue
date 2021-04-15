@@ -21,6 +21,7 @@
     <b-field>
       <b-input
         v-model="email"
+        type="email"
         placeholder="email"
         icon-pack="fas"
         icon="inbox"
@@ -74,7 +75,7 @@
 </template>
 
 <script>
-import { addCustomer } from "../../database/queries.js";
+import { addUser } from "../../database/queries.js";
 
 const locations = ["North", "South", "East", "West"];
 
@@ -94,7 +95,6 @@ export default {
   },
   methods: {
     submit: function () {
-      console.log("hello");
       if (this.hasAnyError) {
         this.errorMessage = "Please ensure there are no errors!";
         this.errorIsActive = true;
@@ -107,9 +107,10 @@ export default {
         location: this.location,
         username: this.username,
         password: this.password,
+        isCustomer: true,
       };
 
-      addCustomer(customerData).then(() => {
+      addUser(customerData).then(() => {
         this.$router.push({ name: "home" });
       });
     },

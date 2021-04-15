@@ -15,9 +15,16 @@
       <b-navbar-item
         tag="router-link"
         :to="{ name: 'products' }"
-        v-if="isLoggedIn"
+        v-if="isLoggedIn && isCustomer"
       >
         Products
+      </b-navbar-item>
+      <b-navbar-item
+        tag="router-link"
+        :to="{ name: 'listings' }"
+        v-if="isLoggedIn && !isCustomer"
+      >
+        Listings
       </b-navbar-item>
     </template>
     <template #end>
@@ -39,13 +46,6 @@
           v-if="isCustomer"
         >
           Cart
-        </b-navbar-item>
-        <b-navbar-item
-          tag="router-link"
-          :to="{ name: 'listings' }"
-          v-if="isBusiness"
-        >
-          Listings
         </b-navbar-item>
         <b-navbar-item
           tag="router-link"

@@ -198,8 +198,8 @@ export function getImageUrl(baseUrl, imageName, folderName) {
   });
 }
 
-export function addCustomer(customerData) {
-  return database.collection("customers").add(customerData);
+export function addUser(customerData) {
+  return database.collection("users").add(customerData);
 }
 
 export function getProducts() {
