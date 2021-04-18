@@ -3,7 +3,6 @@ import database from "./firebase.js";
 import firebase from "firebase";
 
 export function validateLogin(username, password) {
-  console.log(username, password);
   return database
     .collection("users")
     .where("username", "==", username)
@@ -77,17 +76,14 @@ export function addOrder(order) {
 }
 
 /**
- * Gets the Firestore document reference of a user in either
- * the customer or business collection, depending on the user type
+ * Gets the Firestore document reference of a user in
+ * the users collection
  * @param {String} userId A string representing the document ID
  * associated with the user in the customer/business collection
- * @param {Boolean} isCustomer A boolean representing whether the user
- * is a customer or a business
  * @returns A document reference
  */
-export function getUserDetailsDocRef(userId, isCustomer) {
-  const formatUserType = isCustomer ? "customers" : "businesses";
-  return database.collection(formatUserType).get(userId);
+export function getUserDetailsDocRef(userId) {
+  return database.collection("users").doc(userId);
 }
 
 /**

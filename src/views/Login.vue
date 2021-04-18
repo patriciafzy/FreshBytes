@@ -44,16 +44,28 @@ export default {
   methods: {
     login: function () {
       if (this.username === "" || this.password === "") {
-        alert("Please enter valid username and password!");
+        this.loginAlert("Please enter valid username and password!");
+      } else {
+        validateLogin(this.username, this.password)
+          .then((result) => {
+            if (result) {
+              this.$store.commit("login", result);
+              this.$router.push({ name: "home" });
+            }
+          })
+          .catch(() => this.loginAlert("Invalid username/password!"));
       }
-
-      validateLogin(this.username, this.password).then((result) => {
-        if (result) {
-          this.$store.commit("login", result);
-          this.$router.push({ name: "home" });
-        } else {
-          alert("Invalid username/password!!");
-        }
+    },
+    loginAlert: function (message) {
+      this.$buefy.dialog.alert({
+        title: "Error",
+        message: message,
+        type: "is-danger",
+        hasIcon: true,
+        icon: "times-circle",
+        iconPack: "fa",
+        ariaRole: "alertdialog",
+        ariaModal: true,
       });
     },
   },

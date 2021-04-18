@@ -23,13 +23,6 @@
       </b-field>
     </div>
     <div v-else>
-      <b-field label="Address">
-        <b-input
-          :value="userDetails.address"
-          class="data"
-          name="address"
-        ></b-input>
-      </b-field>
       <b-field label="Description">
         <b-input
           class="data"
@@ -72,7 +65,8 @@ export default {
         }
       }
 
-      let docRef = getUserDetailsDocRef(this.userId, this.isCustomer);
+      let docRef = getUserDetailsDocRef(this.userId);
+      console.log(docRef);
       updateFromDocRef(docRef, updateData)
         .then(() => {
           console.log("User details successfully updated");
