@@ -23,13 +23,6 @@
       </b-field>
     </div>
     <div v-else>
-      <b-field label="Address">
-        <b-input
-          :value="userDetails.address"
-          class="data"
-          name="address"
-        ></b-input>
-      </b-field>
       <b-field label="Description">
         <b-input
           class="data"

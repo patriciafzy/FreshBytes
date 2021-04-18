@@ -9,9 +9,17 @@
         v-on:click="swap"
       ></b-menu-item>
       <b-menu-item
+        v-if="isCustomer"
         icon="shopping-basket"
         label="Orders"
         id="orders"
+        v-on:click="swap"
+      ></b-menu-item>
+      <b-menu-item
+        v-else
+        icon="shopping-basket"
+        label="Listings"
+        id="listings"
         v-on:click="swap"
       ></b-menu-item>
       <b-menu-item
@@ -36,6 +44,9 @@ export default {
         details: true,
       },
     };
+  },
+  props: {
+    isCustomer: Boolean,
   },
   methods: {
     /**
