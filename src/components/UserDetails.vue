@@ -30,7 +30,7 @@ export default {
   props: {
     userDetails: Object,
     isCustomer: Boolean,
-    userId: {},
+    userId: String,
   },
   computed: {
     userData: function () {

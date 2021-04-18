@@ -72,7 +72,8 @@ export default {
         }
       }
 
-      let docRef = getUserDetailsDocRef(this.userId, this.isCustomer);
+      let docRef = getUserDetailsDocRef(this.userId);
+      console.log(docRef);
       updateFromDocRef(docRef, updateData)
         .then(() => {
           console.log("User details successfully updated");
