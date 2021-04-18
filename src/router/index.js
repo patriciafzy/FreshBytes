@@ -1,71 +1,46 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Profile from "../views/Profile.vue";
-import Products from "../views/Products.vue";
-import Cart from "../views/Cart.vue";
-import AddListing from "../components/AddListing.vue";
-import ReviewListing from "../components/ReviewListing.vue";
-import Signup from "../views/Signup.vue";
-import store from "../store/index.js";
-import Login from "../views/Login.vue";
-import { DialogProgrammatic as Dialog } from "buefy";
-import Listings from "../views/Listings.vue";
-import About from "../views/About.vue";
+import store from "@/store/index.js";
+
+import MainPage from "@/views/MainPage";
+import ProductsPage from "@/views/ProductsPage";
+import ProfilePage from "@/views/ProfilePage";
+import BusinessListingsComponent from "@/components/listings/BusinessListingsComponent.vue";
+import CartPage from "@/views/CartPage";
+import DashboardPage from "@/views/DashboardPage";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: About,
-  },
-  {
-    path: "/profile",
-    name: "profile",
-    component: Profile,
+    name: "main",
+    component: MainPage,
   },
   {
     path: "/products",
     name: "products",
-    component: Products,
+    component: ProductsPage,
   },
   {
-    path: "/addlisting",
-    name: "addListing",
-    component: AddListing,
-  },
-  {
-    path: "/reviewListing",
-    name: "reviewListing",
-    component: ReviewListing,
-    props: true,
-  },
-  {
-    path: "/cart",
-    name: "cart",
-    component: Cart,
-  },
-  {
-    path: "/signup",
-    name: "signup",
-    component: Signup,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: Login,
+    path: "/profile",
+    name: "profile",
+    component: ProfilePage,
   },
   {
     path: "/listings",
     name: "listings",
-    component: Listings,
+    component: BusinessListingsComponent,
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: CartPage,
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashboardPage,
   },
 ];
 
@@ -75,40 +50,35 @@ const router = new VueRouter({
   routes,
 });
 
-// Protected Routes - Only can access on Login
-const loginGuard = [
-  "profile",
-  "products",
-  "product",
-  "addListing",
-  "reviewListing",
-  "cart",
-];
+// Strict pages
+const customerPages = ["products", "cart"];
+const businessPages = ["listings"];
 
-// Protected Routes - Only can access on Logout
-const logoutGuard = ["signup", "login"];
-
+// Login Guard
 router.beforeEach((to, from, next) => {
-  if (!loginGuard.includes(to.name) || store.getters.isLoggedIn) return next();
-  else {
-    Dialog.alert({
-      title: "Access Denied",
-      message: "Please login before attempting to access this page.",
-      type: "is-danger",
-      hasIcon: true,
-      icon: "exclamation-circle",
-      iconPack: "fa",
-      ariaRole: "alertdialog",
-      ariaModal: true,
-    });
-    return next({ name: "home" });
-  }
-});
+  if (to.name === from.name) return;
 
-router.beforeEach((to, from, next) => {
-  if (!logoutGuard.includes(to.name) || !store.getters.isLoggedIn)
+  const isLoggedIn = store.getters.isLoggedIn;
+
+  if (to.name === "main") {
     return next();
-  return next({ name: "home" });
+  }
+
+  if (!isLoggedIn) {
+    return next({ name: "main" });
+  }
+
+  const isCustomer = store.getters.isCustomer;
+
+  if (customerPages.includes(to.name) && !isCustomer) {
+    return next({ name: "main" });
+  }
+
+  if (businessPages.includes(to.name) && isCustomer) {
+    return next({ name: "main" });
+  }
+
+  return next();
 });
 
 export default router;

@@ -1,6 +1,4 @@
-# final-project
-
-BT3103
+# fresher-bytes
 
 ## Project setup
 ```

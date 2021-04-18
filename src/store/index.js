@@ -1,12 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { firestoreAction, vuexfireMutations } from "vuexfire";
+import { database } from "@/firebase/firebase";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
 const ls = new SecureLS({ isCompression: false });
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   plugins: [
     createPersistedState({
       storage: {
@@ -17,76 +19,76 @@ const store = new Vuex.Store({
     }),
   ],
   state: {
+    items: [],
+    orders: [],
+    user: {},
     isLoggedIn: false,
-    userData: {},
-    products: [],
     cart: [],
   },
-  mutations: {
-    toggleLogin: function (state) {
-      state.isLoggedIn = !state.isLoggedIn;
-    },
-    login: function (state, payload) {
-      state.isLoggedIn = true;
-      state.userData = payload;
-    },
-    logout: function (state) {
-      state.isLoggedIn = false;
-      state.userData = {};
-      state.cart = [];
-    },
-    addToCart(state, payload) {
-      const record = state.cart.find((product) => product.id == payload.id);
-      console.log(record);
-      if (!record) {
-        const product = payload;
-        product.cartQuantity = 1;
-        state.cart.push(product);
-      } else {
-        record.cartQuantity++;
-      }
-    },
-    setQuantity(state, payload) {
-      const record = state.cart.find((product) => product.id === payload.id);
-      record.cartQuantity = payload.newQuantity;
-    },
-    removeFromCart(state, payload) {
-      const index = state.cart.findIndex((product) => product.id === payload);
-      state.cart.splice(index, 1);
-    },
-    resetCart(state) {
-      state.cart = [];
-    },
-  },
   getters: {
-    categories: function (state) {
-      return state.products;
+    isLoggedIn: (state) => state.isLoggedIn,
+    isCustomer: (state) => state.user.isCustomer,
+    getUser: (state) => state.user,
+    getUsername: (state) => state.user.username,
+    getItems: (state) => state.items,
+    getCart: (state) => state.cart,
+    getCartCount: (state) => state.cart.length,
+    getOrders: (state) => state.orders,
+  },
+  mutations: {
+    ...vuexfireMutations,
+    login: (state, userData) => {
+      state.user = userData;
+      state.isLoggedIn = true;
     },
-    product: function (state) {
-      return (id) => {
-        return state.products.filter((p) => p[0] === id);
-      };
+    logout: (state) => {
+      state.user = {};
+      state.isLoggedIn = false;
+      state.cart = [];
     },
-    getCart: function (state) {
-      return state.cart;
+    addToCart: (state, item) => {
+      state.cart.push({
+        ...item,
+        currentQuantity: 1,
+      });
     },
-    isLoggedIn: function (state) {
-      return state.isLoggedIn;
+    clearCart: (state) => {
+      state.cart = [];
     },
-    getUserData: function (state) {
-      return state.userData;
+    addItemToCart: (state, item) => {
+      const index = state.cart.findIndex((x) => x.id === item.id);
+      const cartItem = state.cart[index];
+
+      state.cart.splice(index, 1, {
+        ...cartItem,
+        currentQuantity: cartItem.currentQuantity + 1,
+      });
     },
-    getUsername: function (state) {
-      return state.userData.username;
+    reduceItemFromCart: (state, item) => {
+      const index = state.cart.findIndex((x) => x.id === item.id);
+      const cartItem = state.cart[index];
+
+      state.cart.splice(index, 1, {
+        ...cartItem,
+        currentQuantity: cartItem.currentQuantity - 1,
+      });
     },
-    isCustomer: function (state) {
-      return state.userData.isCustomer;
-    },
-    getUserName: function (state) {
-      return state.userData.name;
+    removeItemFromCart: (state, item) => {
+      state.cart = state.cart.filter((x) => x.id !== item.id);
     },
   },
-  modules: {},
+  actions: {
+    bindItems: firestoreAction(({ bindFirestoreRef }) => {
+      // return the promise returned by `bindFirestoreRef`
+      return bindFirestoreRef("items", database.collection("items"));
+    }),
+    bindUserOrders: firestoreAction(({ state, bindFirestoreRef }) => {
+      return bindFirestoreRef(
+        "orders",
+        database
+          .collection("orders")
+          .where("username", "==", state.user.username)
+      );
+    }),
+  },
 });
-
-export default store;
