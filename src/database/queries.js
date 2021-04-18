@@ -3,7 +3,6 @@ import database from "./firebase.js";
 import firebase from "firebase";
 
 export function validateLogin(username, password) {
-  console.log(username, password);
   return database
     .collection("users")
     .where("username", "==", username)

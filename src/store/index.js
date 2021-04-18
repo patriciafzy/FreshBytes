@@ -27,7 +27,6 @@ const store = new Vuex.Store({
       state.isLoggedIn = !state.isLoggedIn;
     },
     login: function (state, payload) {
-      console.log(payload);
       state.isLoggedIn = true;
       state.userData = payload;
     },

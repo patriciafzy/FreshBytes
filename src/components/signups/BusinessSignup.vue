@@ -116,7 +116,14 @@ export default {
       };
 
       addUser(businessData).then(() => {
-        this.$router.push({ name: "home" });
+        this.$buefy.snackbar.open({
+          message: "Account successfully created. Please login again.",
+          type: "is-success",
+          position: "is-top",
+          actionText: "Ok",
+          indefinite: true,
+        });
+        this.$router.push({ name: "home" }).then(() => window.scrollTo(0, 0));
       });
     },
   },
