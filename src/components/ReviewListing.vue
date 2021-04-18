@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { addListing } from "../database/queries.js";
+import { addListing, getUserDetailsDocRef } from "../database/queries.js";
 
 export default {
   props: {
@@ -32,6 +32,9 @@ export default {
   },
   methods: {
     sendListing: function () {
+      const businessID = this.$store.getters.getUserData.id;
+      const businessDocRef = getUserDetailsDocRef(businessID);
+      this.items["business"] = businessDocRef;
       addListing(this.items);
       this.$router.push({ name: "home" });
     },
