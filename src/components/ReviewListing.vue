@@ -34,8 +34,9 @@ export default {
     sendListing: function () {
       const businessID = this.$store.getters.getUserData.id;
       const businessDocRef = getUserDetailsDocRef(businessID);
-      this.items["business"] = businessDocRef;
-      addListing(this.items);
+      let payload = JSON.parse(JSON.stringify(this.items));
+      payload["business"] = businessDocRef;
+      addListing(payload);
       this.$router.push({ name: "home" });
     },
   },
