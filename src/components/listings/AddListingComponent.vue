@@ -10,7 +10,7 @@
             <p class="has-text-danger">{{ errors[0] }}</p>
           </div>
         </validation-provider>
-        <validation-provider rules="required" v-slot="{ errors, valid }">
+        <validation-provider rules="required|max:40" v-slot="{ errors, valid }">
           <b-field
             :message="errors"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
@@ -66,6 +66,21 @@
               type="number"
               v-model="price"
               placeholder="Current Price ($)"
+            />
+          </b-field>
+        </validation-provider>
+        <validation-provider
+          rules="required|positive"
+          v-slot="{ errors, valid }"
+        >
+          <b-field
+            :message="errors"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+          >
+            <b-input
+              type="number"
+              v-model="weight"
+              placeholder="Weight (kg/l)"
             />
           </b-field>
         </validation-provider>
@@ -163,6 +178,7 @@ export default {
       bestBefore: new Date(),
       originalPrice: "",
       price: "",
+      weight: "",
       quantity: "",
       dietary: [],
       collection: [],

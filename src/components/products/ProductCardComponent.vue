@@ -7,11 +7,14 @@
     </div>
     <div class="card-content">
       <div class="media-content">
-        <p class="title is-4">{{ product.name }}</p>
-        <p class="subtitle is-6">{{ getPrice }}</p>
+        <p class="title is-4 mb-1">{{ product.name }}</p>
+        <p class="title is-4 mb-0 has-text-success">{{ getPrice }}</p>
+        <p>
+          <strike>{{ getOriginalPrice }}</strike>
+        </p>
       </div>
       <div class="content">
-        <p>{{ product.description }}</p>
+        <p class="block-with-text">{{ product.description }}</p>
       </div>
     </div>
     <footer class="card-footer">
@@ -53,6 +56,9 @@ export default {
     getPrice: function () {
       return "$" + parseFloat(this.product.price).toFixed(2);
     },
+    getOriginalPrice: function () {
+      return "$" + parseFloat(this.product.originalPrice).toFixed(2);
+    },
   },
   methods: {
     addToCart: function () {
@@ -74,8 +80,44 @@ img {
   max-width: 300px;
 }
 
+.media-content {
+  padding-bottom: 10px;
+}
+
+.card-content {
+  height: 220px;
+}
+
 .content {
   height: 50px;
+  max-height: 50px;
+}
+
+.block-with-text {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 3.6em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+}
+
+.block-with-text:before {
+  content: "...";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.block-with-text:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  background: white;
 }
 
 .card {

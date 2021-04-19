@@ -5,6 +5,7 @@ import {
   email,
   alpha_spaces,
   min,
+  max,
 } from "vee-validate/dist/rules";
 import { extend } from "vee-validate";
 
@@ -26,6 +27,11 @@ extend("confirmed", {
 extend("alpha_spaces", {
   ...alpha_spaces,
   message: "Name must be made of letters only.",
+});
+
+extend("max", {
+  ...max,
+  message: "Name cannot exceed 40 characters!",
 });
 
 extend("password_min", {

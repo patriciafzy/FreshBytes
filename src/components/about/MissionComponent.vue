@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <h1 class="title" data-aos="fade-in" data-aos-offset="200">Our Mission</h1>
-    <div class="about-card" data-aos="fade-right" data-aos-offset="200">
+    <h1 class="title" data-aos="fade-in">Our Mission</h1>
+    <div class="about-card" data-aos="fade-right">
       <p>
         We connect you to F&B businesses and local supermarket who have fresh
         but excess meals or products for sale and consumption at discounted
@@ -12,7 +12,7 @@
         Earth.
       </p>
     </div>
-    <div class="about-card" data-aos="fade-left" data-aos-offset="200">
+    <div class="about-card" data-aos="fade-left">
       <h1 class="title is-4">Less Waste, Better Taste</h1>
       <p>
         Food waste is one of the biggest waste streams in Singapore and the
@@ -45,6 +45,7 @@ export default {
 
 <style scoped>
 .about {
+  margin-top: 5%;
   padding: 0 20%;
 }
 

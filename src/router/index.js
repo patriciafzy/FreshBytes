@@ -8,6 +8,7 @@ import ProfilePage from "@/views/ProfilePage";
 import BusinessListingsComponent from "@/components/listings/BusinessListingsComponent.vue";
 import CartPage from "@/views/CartPage";
 import DashboardPage from "@/views/DashboardPage";
+import FAQ from "@/views/FAQ";
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,11 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: DashboardPage,
+  },
+  {
+    path: "/faq",
+    name: "faq",
+    component: FAQ,
   },
 ];
 

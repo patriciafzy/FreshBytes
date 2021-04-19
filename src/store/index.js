@@ -24,6 +24,7 @@ export default new Vuex.Store({
     user: {},
     isLoggedIn: false,
     cart: [],
+    businesses: [],
   },
   getters: {
     isLoggedIn: (state) => state.isLoggedIn,
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     getCart: (state) => state.cart,
     getCartCount: (state) => state.cart.length,
     getOrders: (state) => state.orders,
+    getBusinesses: (state) => state.businesses,
   },
   mutations: {
     ...vuexfireMutations,
@@ -88,6 +90,12 @@ export default new Vuex.Store({
         database
           .collection("orders")
           .where("username", "==", state.user.username)
+      );
+    }),
+    bindBusinesses: firestoreAction(({ bindFirestoreRef }) => {
+      return bindFirestoreRef(
+        "businesses",
+        database.collection("users").where("isCustomer", "==", false)
       );
     }),
   },
