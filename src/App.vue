@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <nav-bar-component v-if="isLoggedIn" />
     <router-view />
   </div>

@@ -1,15 +1,21 @@
 <template>
-  <div class="home">
-    <div class="start">
-      <img src="@/assets/img/FreshBytesLogo.png" width="300px" height="300px" />
-      <login-component v-if="loginMode" @signup="toggleLogin" />
-      <signup-component
-        v-if="!loginMode"
-        @back="toggleLogin"
-      ></signup-component>
-      <div class="about-intro">Scroll down to learn more about us!</div>
+  <div>
+    <div class="home">
+      <section class="start">
+        <img
+          src="@/assets/img/FreshBytesLogo.png"
+          width="300px"
+          height="300px"
+          class="img"
+        />
+        <login-component v-if="loginMode" @signup="toggleLogin" />
+        <signup-component v-if="!loginMode" @back="toggleLogin" />
+        <div class="about-intro">Scroll down to learn more about us!</div>
+      </section>
     </div>
-    <mission-component></mission-component>
+    <section>
+      <mission-component></mission-component>
+    </section>
   </div>
 </template>
 
@@ -39,15 +45,20 @@ export default {
 
 <style scoped>
 .home {
-  padding: 20px;
-  margin: 100px 0;
+  min-height: 100vh;
+  position: relative;
 }
 
 .start {
-  height: 100vh;
+  padding-top: 10%;
 }
 
 .about-intro {
-  margin-bottom: 30px;
+  position: absolute;
+  width: 200px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 40px;
 }
 </style>
