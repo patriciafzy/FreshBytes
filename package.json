@@ -19,6 +19,7 @@
     "filepond-plugin-image-preview": "^4.6.6",
     "firebase": "^8.4.1",
     "secure-ls": "^1.2.6",
+    "v-mask": "^2.2.4",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",

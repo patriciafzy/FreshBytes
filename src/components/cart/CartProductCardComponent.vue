@@ -15,6 +15,10 @@
             <small>
               <i>Quantity Remaining: {{ quantityRemaining }}</i>
             </small>
+            <br />
+            <small>
+              <i>Points: {{ productPoints }}</i>
+            </small>
           </p>
           <a @click.prevent="addItemToCart" class="icon">
             <b-icon icon="plus" size="is-small" />
@@ -44,6 +48,9 @@ export default {
       return (
         parseFloat(this.product.price) * this.product.currentQuantity
       ).toFixed(2);
+    },
+    productPoints: function () {
+      return this.product.points * this.product.currentQuantity;
     },
   },
   methods: {

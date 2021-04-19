@@ -31,6 +31,7 @@ export default new Vuex.Store({
     isCustomer: (state) => state.user.isCustomer,
     getUser: (state) => state.user,
     getUsername: (state) => state.user.username,
+    getUserId: (state) => state.user.id,
     getItems: (state) => state.items,
     getCart: (state) => state.cart,
     getCartCount: (state) => state.cart.length,

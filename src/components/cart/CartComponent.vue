@@ -9,6 +9,15 @@
         class="cart-item"
       />
       <div class="title is-4 total-price">Total: ${{ getCartPrice }}</div>
+      <div class="subtitle is-6">Points Earned: {{ getPoints }}</div>
+      <div class="buttons">
+        <b-button type="is-danger" class="button" @click="clearCart">
+          Clear Cart
+        </b-button>
+        <b-button type="is-primary" class="button" @click="$emit('next')">
+          Next
+        </b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +38,11 @@ export default {
         .map((x) => x.price * x.currentQuantity)
         .reduce((a, b) => a + b)
         .toFixed(2);
+    },
+    getPoints: function () {
+      return this.getCart
+        .map((x) => x.points * x.currentQuantity)
+        .reduce((a, b) => a + b);
     },
   },
   methods: {
@@ -59,8 +73,8 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  margin-bottom: 10px;
+.buttons {
+  justify-content: space-between;
 }
 
 .cart-items {

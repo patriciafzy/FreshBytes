@@ -10,29 +10,24 @@
     <div class="orders">
       <h1 class="title is-3">Hello, {{ getUser.name }}!</h1>
       <h1 class="title is-4">Your Orders</h1>
+      <orders-table-component></orders-table-component>
     </div>
-    <b-table :data="getOrders" :columns="columns" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import OrdersTableComponent from "@/components/utils/OrdersTableComponent";
 
 export default {
+  components: {
+    OrdersTableComponent,
+  },
   computed: {
-    ...mapGetters(["getOrders"]),
     ...mapGetters(["getUser"]),
   },
-  data: function () {
-    return {
-      columns: [
-        { field: "orderId", label: "Order ID" },
-        { field: "productId", label: "Product ID" },
-        { field: "originalPrice", label: "Original Price" },
-        { field: "price", label: "Price" },
-        { field: "quantity", label: "Quantity" },
-      ],
-    };
+  created: function () {
+    this.$store.dispatch("bindUserOrders");
   },
 };
 </script>

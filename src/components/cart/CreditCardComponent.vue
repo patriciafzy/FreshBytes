@@ -280,21 +280,11 @@
         </div>
 
         <b-button
-          label="Verify Card Details"
+          label="Checkout"
           class="card-form__button"
           size="is-medium"
           @click="open"
         />
-        <b-message
-          auto-close
-          title="Error!"
-          type="is-success"
-          has-icon
-          v-model="isSuccess"
-          aria-close-label="Close message"
-        >
-          Your Credit Card details have been verified successfully!
-        </b-message>
       </div>
     </div>
   </div>
@@ -367,8 +357,14 @@ export default {
       const loadingComponent = this.$buefy.loading.open({
         container: this.isFullPage ? null : this.$refs.element.$el,
       });
-      setTimeout(() => loadingComponent.close(), 3 * 1000);
-      setTimeout(() => (this.isSuccess = true), 2 * 1000);
+      setTimeout(() => {
+        loadingComponent.close();
+        this.$buefy.toast.open({
+          message: "Success!",
+          type: "is-success",
+        });
+        this.$emit("next");
+      }, 3 * 1000);
     },
     flipCard(status) {
       this.isCardFlipped = status;

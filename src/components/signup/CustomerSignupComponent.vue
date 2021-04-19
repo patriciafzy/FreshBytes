@@ -148,6 +148,7 @@ export default {
       const userData = {
         ...this._data,
         isCustomer: true,
+        points: 0,
       };
 
       delete userData.isPageLoaded;

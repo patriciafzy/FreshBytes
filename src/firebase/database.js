@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import { database } from "@/firebase/firebase";
 
 export const addItem = (itemData) => {
@@ -22,11 +23,18 @@ export const updateItem = (itemData, docID) => {
 export const deleteItem = (itemId) =>
   database.collection("items").doc(itemId).delete();
 
-export const addOrder = async (cartItems) => {
+export const addOrder = async (cartItems, userId) => {
   const uid = UID();
   const timeNow = Date.now();
 
   let promises = [];
+
+  const totalPoints = parseInt(
+    cartItems.map((x) => x.points).reduce((a, b) => a + b)
+  );
+
+  console.log(cartItems);
+  console.log(totalPoints);
 
   cartItems.forEach((item) => {
     promises.push(
@@ -37,6 +45,15 @@ export const addOrder = async (cartItems) => {
       })
     );
   });
+
+  promises.push(
+    database
+      .collection("users")
+      .doc(userId)
+      .update({
+        points: firebase.firestore.FieldValue.increment(totalPoints),
+      })
+  );
 
   await Promise.all(promises);
 };

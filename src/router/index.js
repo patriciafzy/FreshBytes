@@ -9,6 +9,7 @@ import BusinessListingsComponent from "@/components/listings/BusinessListingsCom
 import CartPage from "@/views/CartPage";
 import DashboardPage from "@/views/DashboardPage";
 import FAQ from "@/views/FAQ";
+import CompleteCheckoutPage from "@/views/CompleteCheckoutPage";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
     name: "faq",
     component: FAQ,
   },
+  {
+    path: "/completeCheckout",
+    name: "completeCheckout",
+    component: CompleteCheckoutPage,
+  },
 ];
 
 const router = new VueRouter({
@@ -57,7 +63,7 @@ const router = new VueRouter({
 });
 
 // Strict pages
-const customerPages = ["cart"];
+const customerPages = ["cart", "completeCheckout"];
 const businessPages = ["listings"];
 
 // Login Guard

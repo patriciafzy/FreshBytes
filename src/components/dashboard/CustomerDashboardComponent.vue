@@ -45,7 +45,8 @@
         </div>
         <div class="tile is-child is-6 box">
           <h1 class="title is-5">Orders</h1>
-          <b-table :data="getOrders" :columns="columns" />
+          <!-- <b-table :data="getOrders" :columns="columns" /> -->
+          <orders-table-component />
         </div>
         <div class="tile is-child is-3 box">
           <h1 class="title is-5">Global Saved Waste</h1>
@@ -63,6 +64,7 @@ import DoughnutChart from "./charts/DoughnutChart";
 import LineChart from "./charts/LineChart";
 import Bar2Chart from "./charts/Bar2Chart";
 import Doughnut2Chart from "./charts/Doughnut2Chart";
+import OrdersTableComponent from "@/components/utils/OrdersTableComponent";
 
 export default {
   components: {
@@ -71,12 +73,13 @@ export default {
     LineChart,
     Bar2Chart,
     Doughnut2Chart,
+    OrdersTableComponent,
   },
   data: function () {
     return {
       columns: [
         { field: "orderId", label: "Order ID" },
-        { field: "productId", label: "Product ID" },
+        { field: "productName", label: "Product" },
         { field: "originalPrice", label: "Original Price" },
         { field: "price", label: "Price" },
         { field: "quantity", label: "Quantity" },

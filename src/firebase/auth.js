@@ -18,7 +18,10 @@ export const login = (username, password) => {
 
       if (userData.password !== password) throw "Invalid Username/Password!";
 
-      return userData;
+      return {
+        ...userData,
+        id: snapshot.docs[0].id,
+      };
     });
 };
 

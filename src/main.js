@@ -7,6 +7,9 @@ import "./assets/scss/app.scss";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./vee-validate";
+import VueMask from "v-mask";
+
+Vue.use(VueMask);
 
 Vue.use(Buefy, {
   defaultIconPack: "fas",

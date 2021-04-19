@@ -208,6 +208,7 @@ export default {
         ...this._data,
         business: this.getUser.username,
         image: fileLocation,
+        points: Math.floor(this.weight * 10),
       };
 
       addItem(itemData).then(() => {
