@@ -201,4 +201,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.card {
+  width: 500px;
+  margin: auto;
+}
+</style>

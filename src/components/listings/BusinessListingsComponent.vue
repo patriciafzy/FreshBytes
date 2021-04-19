@@ -12,7 +12,7 @@
     >
       Delete Selected Listings
     </b-button>
-    <b-modal v-model="addListingActive" has-modal-card>
+    <b-modal v-model="addListingActive" scroll="keep">
       <add-listing-component
         @close="
           () => {

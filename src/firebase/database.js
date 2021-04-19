@@ -3,7 +3,7 @@ import { database } from "@/firebase/firebase";
 export const addItem = (itemData) => {
   const timeNow = Date.now();
 
-  database.collection("items").add({
+  return database.collection("items").add({
     ...itemData,
     createdAt: timeNow,
   });
