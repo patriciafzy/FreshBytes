@@ -17,8 +17,7 @@
         <cart-component />
       </b-step-item>
       <b-step-item step="2" label="Address" :clickable="false">
-        <h1 class="title has-text-centered">Address</h1>
-        Lorem ipsum dolor sit amet.
+        <address-component />
       </b-step-item>
       <b-step-item step="3" label="Payment" :clickable="false">
         <h1 class="title has-text-centered">Payment</h1>
@@ -45,6 +44,7 @@
 <script>
 import CartComponent from "@/components/cart/CartComponent";
 import CreditCardComponent from "@/components/cart/CreditCardComponent.vue";
+import AddressComponent from "@/components/cart/AddressComponent.vue";
 import Complete from "@/components/cart/Complete";
 import { mapGetters } from "vuex";
 
@@ -53,6 +53,7 @@ export default {
     CartComponent,
     CreditCardComponent,
     Complete,
+    AddressComponent,
   },
   data: function () {
     return {
