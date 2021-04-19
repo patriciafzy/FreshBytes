@@ -1,12 +1,20 @@
 import { database } from "@/firebase/firebase";
 
-export const addItem = (itemData) => database.collection("items").add(itemData);
+export const addItem = (itemData) => {
+  const timeNow = Date.now();
+
+  database.collection("items").add({
+    ...itemData,
+    createdAt: timeNow,
+  });
+};
 
 export const deleteItem = (itemId) =>
   database.collection("items").doc(itemId).delete();
 
 export const addOrder = async (cartItems) => {
   const uid = UID();
+  const timeNow = Date.now();
 
   let promises = [];
 
@@ -15,6 +23,7 @@ export const addOrder = async (cartItems) => {
       database.collection("orders").add({
         ...item,
         orderId: uid,
+        createdAt: timeNow,
       })
     );
   });

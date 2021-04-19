@@ -2,12 +2,12 @@ import firebase from "firebase";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCnLNY9Vt_AUT4xpklQTWd99uPaVX9EELA",
-  authDomain: "fresher-bytes.firebaseapp.com",
-  projectId: "fresher-bytes",
-  storageBucket: "fresher-bytes.appspot.com",
-  messagingSenderId: "243166399232",
-  appId: "1:243166399232:web:6c6afc2a8dff08806dc1e5",
+  apiKey: "AIzaSyDOQfQfOvB3q7euXKadJCWKmLRmFp7srzQ",
+  authDomain: "freshbytes-ce003.firebaseapp.com",
+  projectId: "freshbytes-ce003",
+  storageBucket: "freshbytes-ce003.appspot.com",
+  messagingSenderId: "659573047582",
+  appId: "1:659573047582:web:0535b529ad16d67e50090f",
 };
 
 // Initialize Firebase
