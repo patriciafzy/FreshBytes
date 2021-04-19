@@ -7,7 +7,7 @@
         </div>
       </section>
     </div>
-    <div>
+    <div class="orders">
       <h1 class="title is-3">Hello, {{ getUser.name }}!</h1>
       <h1 class="title is-4">Your Orders</h1>
     </div>
@@ -37,4 +37,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.orders {
+  margin-top: 40px;
+}
+</style>
