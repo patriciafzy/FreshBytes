@@ -2,13 +2,31 @@
   <div class="cart">
     <h1 class="title has-text-centered">Cart</h1>
     <div class="cart-items">
-      <cart-product-card-component
-        v-for="item in getCart"
-        :key="item.name"
-        :product="item"
-        class="cart-item"
-      />
-      <div class="title is-4 total-price">Total: ${{ getCartPrice }}</div>
+      <div class="title is-4 total-price">
+        Your Grand Total: ${{ getCartPrice }}
+      </div>
+      <div class="field is-grouped is-grouped-centered">
+        <b-button type="is-danger" @click="clearCart" class="button"
+          >Clear Cart</b-button
+        >
+        <b-button type="is-primary" @click="showsuccess" class="button"
+          >Checkout</b-button
+        >
+      </div>
+
+      <section>
+        <b-message
+          v-if="isActive"
+          auto-close
+          title="Success!"
+          type="is-success"
+          has-icon
+          v-model="isActive"
+          aria-close-label="Close message"
+        >
+          Thank you for shopping at Fresh Bytes!
+        </b-message>
+      </section>
     </div>
   </div>
 </template>
@@ -16,11 +34,12 @@
 <script>
 import { mapGetters } from "vuex";
 import { addOrder, reduceItems } from "@/firebase/database";
-import CartProductCardComponent from "@/components/cart/CartProductCardComponent";
 
 export default {
-  components: {
-    CartProductCardComponent,
+  data() {
+    return {
+      isActive: false,
+    };
   },
   computed: {
     ...mapGetters(["getCart", "getUsername"]),
@@ -34,6 +53,11 @@ export default {
   methods: {
     clearCart: function () {
       this.$store.commit("clearCart");
+    },
+    showsuccess: function () {
+      this.isActive = true;
+      setTimeout(() => (this.isActive = false), 10 * 1000);
+      this.checkout();
     },
     checkout: async function () {
       const checkoutData = this.getCart.map((product) => {
