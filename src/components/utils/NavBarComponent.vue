@@ -5,28 +5,34 @@
         <img src="@/assets/img/FreshBytesLogo.png" />
       </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'main' }">
-        Home
+        <b-icon pack="fas" icon="home" size="is-medium"> </b-icon>
+        <span>Home</span>
       </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'faq' }">
-        FAQ
+        <b-icon pack="fas" icon="question" size="is-medium"> </b-icon>
+        <span>FAQ</span>
       </b-navbar-item>
     </template>
     <template #end>
       <b-navbar-item tag="router-link" :to="{ name: 'products' }">
-        Products
+        <b-icon pack="fas" icon="utensils" size="is-medium"> </b-icon>
+        <span>Products</span>
       </b-navbar-item>
       <b-navbar-item
         tag="router-link"
         :to="{ name: 'listings' }"
         v-if="!isCustomer"
       >
-        Listings
+        <b-icon pack="fas" icon="folder-plus" size="is-medium"> </b-icon>
+        <span>Listings</span>
       </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
-        Profile
+        <b-icon pack="fas" icon="user" size="is-medium"> </b-icon>
+        <span>Profile</span>
       </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'dashboard' }">
-        Dashboard
+        <b-icon pack="fas" icon="chart-line" size="is-medium"> </b-icon>
+        <span>Dashboard</span>
       </b-navbar-item>
       <b-navbar-item v-if="isCustomer" tag="router-link" :to="{ name: 'cart' }">
         <div class="cartcount" v-if="getCartCount > 0">{{ getCartCount }}</div>
