@@ -1,7 +1,13 @@
 <template>
   <div class="products">
-    <h1 class="title is-3">Welcome to our awesome Market</h1>
-    <h1 class="subtitle is-5">Below you will find our latest products!</h1>
+    <b-loading :is-full-page="true" v-model="isLoading"></b-loading>
+    <div v-if="isCustomer">
+      <h1 class="title is-3">Welcome to our awesome Market</h1>
+      <h1 class="subtitle is-5">Below you will find our latest products!</h1>
+    </div>
+    <div v-else>
+      <h1 class="title is-3">All Products</h1>
+    </div>
     <div class="columns">
       <div class="column is-one-fifth filter">
         <b-field :label="currentFilteredPrice">
@@ -9,16 +15,29 @@
         </b-field>
         <hr />
         <div class="block">
-          <b-checkbox v-model="filterType" native-value="UglyFood">
-            Ugly Food
-          </b-checkbox>
-          <b-checkbox v-model="filterType" native-value="Product">
-            Product
-          </b-checkbox>
+          <b-field label="Product Category" class="checkbox">
+            <b-checkbox v-model="filterType" native-value="UglyFood">
+              Ugly Food
+            </b-checkbox>
+            <b-checkbox v-model="filterType" native-value="Product">
+              Product
+            </b-checkbox>
+          </b-field>
         </div>
         <hr />
-        <b-field>
+        <b-field label="Filter">
           <b-input placeholder="Search Product" v-model="filterName" />
+        </b-field>
+        <hr />
+        <b-field label="Company" class="block">
+          <b-checkbox
+            v-for="business in getBusinessNames"
+            :key="business.name"
+            v-model="filterCompany"
+            :native-value="business.username"
+          >
+            {{ business.name }}
+          </b-checkbox>
         </b-field>
       </div>
       <transition-group name="list" tag="p" class="column items">
@@ -44,13 +63,15 @@ export default {
   },
   data: function () {
     return {
+      isLoading: true,
       filterPrice: 50,
       filterType: [],
       filterName: "",
+      filterCompany: [],
     };
   },
   computed: {
-    ...mapGetters(["getItems", "getCart"]),
+    ...mapGetters(["getItems", "getCart", "getBusinesses"]),
     currentFilteredPrice: function () {
       return "Max Price: $" + this.filterPrice;
     },
@@ -61,10 +82,28 @@ export default {
         const validType =
           this.filterType.length === 0 || this.filterType.includes(item.type);
         const validName = item.name.includes(this.filterName);
+        const validCompany =
+          this.filterCompany.length === 0 ||
+          this.filterCompany.includes(item.business);
 
-        return validQuantity && validPrice && validType && validName;
+        return (
+          validQuantity && validPrice && validType && validName && validCompany
+        );
       });
     },
+    getBusinessNames: function () {
+      return this.getBusinesses.map((b) => {
+        return {
+          name: b.name,
+          username: b.username,
+        };
+      });
+    },
+  },
+  created: function () {
+    this.$store.dispatch("bindBusinesses").then(() => {
+      this.isLoading = false;
+    });
   },
   methods: {
     addToCart: function (item) {
@@ -99,10 +138,15 @@ export default {
   padding: 40px;
 }
 
+.checkbox {
+  align-items: center;
+}
+
 .filter {
   background-color: whitesmoke;
   padding: 30px;
-  max-height: 275px;
+  height: 100vh;
+  margin-right: 20px;
 }
 
 .items {
@@ -110,8 +154,7 @@ export default {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 0;
   height: auto;
-  margin: auto;
-  margin-left: 30px;
+  margin: 0 auto auto auto;
 }
 
 hr {

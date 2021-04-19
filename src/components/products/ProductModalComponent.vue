@@ -7,6 +7,7 @@
     <div class="modal-card-body">
       <img :src="product.image" />
       <div class="details">
+        <h1 class="title is-5">Sold by: {{ businessName }}</h1>
         <p>Price: ${{ price }}</p>
         <p>Original Price: ${{ originalPrice }}</p>
         <p>
@@ -22,6 +23,7 @@
       </div>
       <div class="other-details">
         <h4 class="title is-4">Other Details:</h4>
+        <p>Weight: {{ product.weight }} kg</p>
         <p>Best Before: {{ bestBefore }}</p>
         <p>Collection Methods: {{ collectionMethods }}</p>
       </div>
@@ -43,7 +45,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isCustomer"]),
+    ...mapGetters(["isCustomer", "getBusinesses"]),
     price: function () {
       return parseFloat(this.product.price).toFixed(2);
     },
@@ -60,6 +62,11 @@ export default {
     },
     collectionMethods: function () {
       return this.product.collection.reduce((a, b) => a + ", " + b);
+    },
+    businessName: function () {
+      return this.getBusinesses.find(
+        (x) => x.username === this.product.business
+      ).name;
     },
   },
   methods: {

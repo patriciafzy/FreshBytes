@@ -51,6 +51,7 @@ export default {
         { field: "bestBefore", label: "Best Before" },
         { field: "originalPrice", label: "Original Price" },
         { field: "price", label: "Price" },
+        { field: "weight", label: "Weight" },
         { field: "quantity", label: "Quantity" },
         { field: "dietary", label: "Dietary Restriction" },
         { field: "collection", label: "Collection Options" },
