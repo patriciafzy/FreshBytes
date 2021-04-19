@@ -9,6 +9,16 @@ export const addItem = (itemData) => {
   });
 };
 
+export const updateItem = (itemData, docID) => {
+  console.log(docID);
+  return database
+    .collection("items")
+    .doc(docID)
+    .update({
+      ...itemData,
+    });
+};
+
 export const deleteItem = (itemId) =>
   database.collection("items").doc(itemId).delete();
 
