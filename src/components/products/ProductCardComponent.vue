@@ -16,7 +16,9 @@
     </div>
     <footer class="card-footer">
       <a class="card-footer-item" @click="isModalActive = true">More Info</a>
-      <a class="card-footer-item" @click="addToCart">Add to Cart</a>
+      <a class="card-footer-item" @click="addToCart" v-if="isCustomer"
+        >Add to Cart</a
+      >
     </footer>
     <b-modal v-model="isModalActive" has-modal-card trap-focus>
       <template>
@@ -31,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ProductModalComponent from "./ProductModalComponent.vue";
 
 export default {
@@ -46,6 +49,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["isCustomer"]),
     getPrice: function () {
       return "$" + parseFloat(this.product.price).toFixed(2);
     },

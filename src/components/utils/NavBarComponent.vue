@@ -6,11 +6,7 @@
       </b-navbar-item>
     </template>
     <template #end>
-      <b-navbar-item
-        tag="router-link"
-        :to="{ name: 'products' }"
-        v-if="isCustomer"
-      >
+      <b-navbar-item tag="router-link" :to="{ name: 'products' }">
         Products
       </b-navbar-item>
       <b-navbar-item

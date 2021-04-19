@@ -31,15 +31,12 @@
           </b-field>
         </validation-provider>
         <validation-provider rules="required" v-slot="{ errors, valid }">
+          <label style="margin-bottom: 2px" class="label">Best Before</label>
           <b-field
             :message="errors"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
           >
-            <b-datepicker
-              v-model="bestBefore"
-              placeholder="Best Before"
-              trap-focus
-            />
+            <b-datepicker v-model="bestBefore" trap-focus />
           </b-field>
         </validation-provider>
         <validation-provider
@@ -88,7 +85,9 @@
           </b-field>
         </validation-provider>
         <validation-provider v-slot="{ errors }">
-          <label style="margin-bottom: 2px">Dietary Restrictions</label>
+          <label style="margin-bottom: 2px" class="label"
+            >Dietary Restrictions</label
+          >
           <div class="block">
             <b-checkbox v-model="dietary" native-value="Lactose Intolerant"
               >Lactose Free</b-checkbox
@@ -106,7 +105,9 @@
           </div>
         </validation-provider>
         <validation-provider rules="required" v-slot="{ errors }">
-          <label style="margin-bottom: 2px">Collection Options</label>
+          <label style="margin-bottom: 2px" class="label"
+            >Collection Options</label
+          >
           <div class="block">
             <b-checkbox v-model="collection" native-value="Delivery"
               >Delivery</b-checkbox
@@ -203,7 +204,10 @@ export default {
 
 <style scoped>
 .card {
-  width: 500px;
   margin: auto;
+}
+
+.label {
+  text-align: left;
 }
 </style>

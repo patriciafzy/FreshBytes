@@ -51,7 +51,7 @@ const router = new VueRouter({
 });
 
 // Strict pages
-const customerPages = ["products", "cart"];
+const customerPages = ["cart"];
 const businessPages = ["listings"];
 
 // Login Guard

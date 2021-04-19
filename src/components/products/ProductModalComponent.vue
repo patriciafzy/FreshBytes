@@ -25,7 +25,7 @@
         <p>Best Before: {{ bestBefore }}</p>
         <p>Collection Methods: {{ collectionMethods }}</p>
       </div>
-      <footer class="modal-card-footer">
+      <footer class="modal-card-footer" v-if="isCustomer">
         <b-button class="is-primary" @click="addToCart">Add to Cart</b-button>
       </footer>
     </div>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     product: {
@@ -41,6 +43,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["isCustomer"]),
     price: function () {
       return parseFloat(this.product.price).toFixed(2);
     },
