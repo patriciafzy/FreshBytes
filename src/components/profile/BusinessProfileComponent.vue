@@ -8,7 +8,7 @@
       </section>
     </div>
 
-    <section>
+    <section class="orders">
       <div class="tile is-ancestor">
         <div class="tile is-parent">
           <article class="tile is-child">
@@ -76,10 +76,16 @@ export default {
 .is-circular {
   border-radius: 50%;
 }
+
 .center {
   text-align: center;
   margin: 0 auto;
 }
+
+.orders {
+  margin-top: 40px;
+}
+
 .navbar-item {
   display: flex;
   flex-flow: column nowrap;

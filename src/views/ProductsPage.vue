@@ -71,7 +71,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getItems", "getCart", "getBusinesses"]),
+    ...mapGetters(["isCustomer", "getItems", "getCart", "getBusinesses"]),
     currentFilteredPrice: function () {
       return "Max Price: $" + this.filterPrice;
     },
