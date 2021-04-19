@@ -4,6 +4,9 @@
       <b-navbar-item tag="router-link" :to="{ name: 'main' }">
         <img src="@/assets/img/FreshBytesLogo.png" />
       </b-navbar-item>
+      <b-navbar-item tag="router-link" :to="{ name: 'main' }">
+        Home
+      </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'faq' }">
         FAQ
       </b-navbar-item>
