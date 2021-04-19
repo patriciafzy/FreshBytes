@@ -5,13 +5,31 @@
       Add New Listing
     </b-button>
     <b-button
-      type="is-danger"
+      type="is-info"
       v-if="hasSelected"
+      @click="editListingActive = true"
+      class="button"
+    >
+      Edit Listings
+    </b-button>
+    <b-button
+      type="is-danger"
+      v-if="hasChecked"
       @click="confirmDelete"
       class="button"
     >
       Delete Selected Listings
     </b-button>
+    <b-modal v-model="editListingActive" scroll="keep">
+      <edit-listing-component
+        v-bind:originalData="this.selected"
+        @close="
+          () => {
+            editListingActive = false;
+          }
+        "
+      />
+    </b-modal>
     <b-modal v-model="addListingActive" scroll="keep">
       <add-listing-component
         @close="
@@ -28,6 +46,11 @@
       checkable
       :checked-rows.sync="checkedRows"
       checkbox-position="right"
+      @check="clearSelect"
+      @checkAll="clearSelect"
+      :selected.sync="selected"
+      @select="resetItems"
+      @click="toggleSelect"
     />
   </div>
 </template>
@@ -35,15 +58,18 @@
 <script>
 import { mapGetters } from "vuex";
 import AddListingComponent from "@/components/listings/AddListingComponent";
+import EditListingComponent from "@/components/listings/EditListingComponent";
 import { deleteItem } from "@/firebase/database";
 
 export default {
   components: {
     AddListingComponent,
+    EditListingComponent,
   },
   data: function () {
     return {
       addListingActive: false,
+      editListingActive: false,
       columns: [
         { field: "type", label: "Type" },
         { field: "name", label: "Name" },
@@ -57,6 +83,7 @@ export default {
         { field: "collection", label: "Collection Options" },
       ],
       checkedRows: [],
+      selected: {},
     };
   },
   computed: {
@@ -72,8 +99,14 @@ export default {
           };
         });
     },
-    hasSelected: function () {
+    hasChecked: function () {
       return this.checkedRows.length > 0;
+    },
+    hasSelected: function () {
+      for (var i in this.selected) {
+        return true;
+      }
+      return false;
     },
     selectedList: function () {
       return this.checkedRows.map((x) => x.name).reduce((a, b) => a + ", " + b);
@@ -105,6 +138,15 @@ export default {
             this.resetItems();
           })
         );
+    },
+    toggleSelect: function (row) {
+      console.log(this.selected);
+      if (row == this.selected) {
+        this.selected = {};
+      }
+    },
+    clearSelect: function () {
+      this.selected = {};
     },
   },
 };
