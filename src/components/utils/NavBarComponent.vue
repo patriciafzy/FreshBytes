@@ -23,7 +23,7 @@
         :to="{ name: 'listings' }"
         v-if="!isCustomer"
       >
-        <b-icon pack="fas" icon="folder-plus" size="is-medium"> </b-icon>
+        <b-icon pack="fas" icon="clipboard-list" size="is-medium"> </b-icon>
         <span>Listings</span>
       </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
