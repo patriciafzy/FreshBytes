@@ -3,8 +3,8 @@
     <nav-bar-component v-if="isLoggedIn" />
     <transition name="fade">
       <router-view />
-      <footer-component></footer-component>
     </transition>
+    <footer-component></footer-component>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import { mapGetters } from "vuex";
 export default {
   components: {
     NavBarComponent,
-    'footer-component': Footer,
+    "footer-component": Footer,
   },
   computed: {
     ...mapGetters(["isLoggedIn"]),
