@@ -31,6 +31,7 @@ export default {
           price: product.price,
           originalPrice: product.originalPrice,
           username: this.getUsername,
+          business: this.product.business,
           points: product.points,
         };
       });

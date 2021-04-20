@@ -1,11 +1,16 @@
 <template>
   <div>
-    <b-table :data="paginatedItems" :columns="columns" />
+    <b-table :data="paginatedItems" :columns="columns">
+      <template #empty>
+        <div class="has-text-centered">No records</div>
+      </template>
+    </b-table>
     <b-pagination
       :total="total"
       :per-page="perPage"
       v-model="current"
-    ></b-pagination>
+      v-if="requiresPagination"
+    />
   </div>
 </template>
 
@@ -26,10 +31,16 @@ export default {
       perPage: 5,
     };
   },
+  created: function () {
+    console.log(this.paginatedItems.length);
+  },
   computed: {
     ...mapGetters(["getOrders"]),
     total: function () {
       return this.getOrders.length;
+    },
+    requiresPagination: function () {
+      return this.getOrders.length > 5;
     },
     paginatedItems: function () {
       const pageNumber = this.current - 1;
