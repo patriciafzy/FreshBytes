@@ -81,7 +81,6 @@ export default {
         { field: "weight", label: "Weight" },
         { field: "quantity", label: "Quantity" },
         { field: "dietary", label: "Dietary Restriction" },
-        { field: "collection", label: "Collection Options" },
       ],
       checkedRows: [],
       selected: {},
