@@ -119,20 +119,6 @@
             <p class="has-text-danger">{{ errors[0] }}</p>
           </div>
         </validation-provider>
-        <validation-provider rules="required" v-slot="{ errors }">
-          <label style="margin-bottom: 2px" class="label"
-            >Collection Options</label
-          >
-          <div class="block">
-            <b-checkbox v-model="collection" native-value="Delivery"
-              >Delivery</b-checkbox
-            >
-            <b-checkbox v-model="collection" native-value="Self Pickup"
-              >Self Pickup</b-checkbox
-            >
-            <p class="has-text-danger">{{ errors[0] }}</p>
-          </div>
-        </validation-provider>
         <div>
           <file-pond
             ref="pond"
