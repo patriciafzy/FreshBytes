@@ -93,6 +93,14 @@ export default new Vuex.Store({
           .where("username", "==", state.user.username)
       );
     }),
+    bindBusinessOrders: firestoreAction(({ state, bindFirestoreRef }) => {
+      return bindFirestoreRef(
+        "orders",
+        database
+          .collection("orders")
+          .where("business", "==", state.user.username)
+      );
+    }),
     bindBusinesses: firestoreAction(({ bindFirestoreRef }) => {
       return bindFirestoreRef(
         "businesses",

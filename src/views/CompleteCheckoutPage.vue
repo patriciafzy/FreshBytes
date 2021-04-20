@@ -31,6 +31,7 @@ export default {
           price: product.price,
           originalPrice: product.originalPrice,
           username: this.getUsername,
+          business: product.business,
           points: product.points,
         };
       });
@@ -47,4 +48,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cart {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+}
+</style>

@@ -66,7 +66,6 @@ export default {
         .then((result) => {
           console.log(result);
           this.$store.commit("login", result);
-          this.$store.dispatch("bindUserOrders");
         })
         .catch((e) => {
           this.error = e;

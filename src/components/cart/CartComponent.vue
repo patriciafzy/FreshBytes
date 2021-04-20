@@ -24,7 +24,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { addOrder, reduceItems } from "@/firebase/database";
 import CartProductCardComponent from "@/components/cart/CartProductCardComponent";
 
 export default {
@@ -47,25 +46,6 @@ export default {
   },
   methods: {
     clearCart: function () {
-      this.$store.commit("clearCart");
-    },
-    checkout: async function () {
-      const checkoutData = this.getCart.map((product) => {
-        return {
-          productId: product.id,
-          quantity: product.currentQuantity,
-          price: product.price,
-          originalPrice: product.originalPrice,
-          username: this.getUsername,
-        };
-      });
-
-      // upload order
-      await addOrder(checkoutData);
-
-      // remove qty from items
-      await reduceItems(this.getCart);
-
       this.$store.commit("clearCart");
     },
   },
