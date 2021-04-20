@@ -1,6 +1,7 @@
 <template>
   <div class="listings">
     <h1 class="title is-3">Your Listings</h1>
+    <h1 class="subtitle is-6">View, edit or remove your listings here!</h1>
     <b-button type="is-primary" @click="addListingActive = true" class="button">
       Add New Listing
     </b-button>

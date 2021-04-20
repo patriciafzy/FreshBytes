@@ -5,7 +5,6 @@ import store from "@/store/index.js";
 import MainPage from "@/views/MainPage";
 import ProductsPage from "@/views/ProductsPage";
 import ProfilePage from "@/views/ProfilePage";
-import BusinessListingsComponent from "@/components/listings/BusinessListingsComponent.vue";
 import CartPage from "@/views/CartPage";
 import DashboardPage from "@/views/DashboardPage";
 import FAQ from "@/views/FAQ";
@@ -28,11 +27,6 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: ProfilePage,
-  },
-  {
-    path: "/listings",
-    name: "listings",
-    component: BusinessListingsComponent,
   },
   {
     path: "/cart",

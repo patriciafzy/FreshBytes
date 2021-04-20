@@ -31,16 +31,16 @@
                 <p class="title is-4">About {{ getUser.name }}</p>
                 <p>{{ getUser.description }}</p>
                 <br />
-                <b-button>Edit Description</b-button>
               </article>
 
               <article class="tile is-child">
                 <b-navbar shadow="true" class="navbar-item">
                   <template #start>
                     <b-navbar-item href="#"> Edit Profile </b-navbar-item>
-                    <b-navbar-item href="#"> Listings </b-navbar-item>
-                    <b-navbar-item href="#"> Orders </b-navbar-item>
-                    <b-navbar-item href="#"> Dashboard </b-navbar-item>
+                    <b-navbar-item href="#">
+                      <span @click="toggleLists()"> Your Listings </span>
+                    </b-navbar-item>
+                    <b-navbar-item href="/dashboard"> Dashboard </b-navbar-item>
                   </template>
                 </b-navbar>
               </article>
@@ -49,9 +49,11 @@
         </div>
       </div>
     </section>
-    <section>
+    <section class="section is-small">
       <div class="columns is-mobile">
-        <div class="column is-three-fifths is-offset-one-fifth"></div>
+        <div v-if="toggleListing">
+          <business-listings-component></business-listings-component>
+        </div>
       </div>
     </section>
   </div>
@@ -59,10 +61,24 @@
 
 <script>
 import { mapGetters } from "vuex";
+import BusinessListingsComponent from "@/components/listings/BusinessListingsComponent.vue";
 
 export default {
+  data() {
+    return {
+      toggleListing: false,
+    };
+  },
+  components: {
+    BusinessListingsComponent,
+  },
   computed: {
     ...mapGetters(["getUser"]),
+  },
+  methods: {
+    toggleLists: function () {
+      this.toggleListing = !this.toggleListing;
+    },
   },
 };
 </script>
