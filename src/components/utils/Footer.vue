@@ -48,11 +48,19 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      email: "",
+    };
+  },
   methods: {
-    toast() {
+    toast: function () {
       this.$buefy.toast.open(
         "You have successfully subscribed to our newsletter!"
       );
+    },
+    clearIconClick: function () {
+      this.email = "";
     },
   },
 };

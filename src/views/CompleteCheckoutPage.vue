@@ -50,7 +50,7 @@ export default {
 
 <style scoped>
 .cart {
-  width: 80%;
+  width: 100%;
   margin: auto;
   margin-top: 50px;
 }
