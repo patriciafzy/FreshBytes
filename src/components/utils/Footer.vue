@@ -32,14 +32,17 @@
             @icon-right-click="clearIconClick"
           >
           </b-input>
-        </b-field>
         <b-button type="is-primary" @click="toast" class="button"
           >Subscribe</b-button
         >
         <br /><br />
         <span><i class="fab fa-instagram"></i></span>
         <a href="https://www.instagram.com/freshest.bytes/"
+<<<<<<< HEAD
           ><b>Follow us on Instagram!</b></a
+=======
+          ><b><span class="padd">Follow us on Instagram!</span></b></a
+>>>>>>> pfzy
         >
       </div>
     </div>
@@ -70,4 +73,7 @@ export default {
 .footer {
   margin-top: 100px;
 }
+
+span.padd{padding-left:10px;}
+
 </style>
