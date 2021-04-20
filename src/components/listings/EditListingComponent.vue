@@ -221,6 +221,7 @@ export default {
   },
   methods: {
     submit: async function () {
+      const loadingComponent = this.$buefy.loading.open();
       const files = this.$refs.pond.getFiles();
       const { hasNewImage, ...filterData } = this._data;
       console.log(hasNewImage);
@@ -248,6 +249,7 @@ export default {
       console.log(itemData);
 
       updateItem(itemData, this.originalData.id).then(() => {
+        loadingComponent.close();
         this.$emit("close");
       });
     },
