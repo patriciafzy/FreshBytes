@@ -227,6 +227,7 @@ export default {
       let itemData = {
         ...filterData,
         business: this.getUser.username,
+        points: Math.floor(this.weight * 10),
       };
 
       if (files.length != 0) {
