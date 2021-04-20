@@ -4,14 +4,20 @@
     <b-button type="is-primary" @click="addListingActive = true" class="button">
       Add New Listing
     </b-button>
-    <b-button
-      type="is-info"
-      v-if="hasSelected"
-      @click="editListingActive = true"
-      class="button"
+    <b-tooltip
+      label="Click on a listing first"
+      type="is-info is-light"
+      :active="!hasSelected"
     >
-      Edit Listings
-    </b-button>
+      <b-button
+        type="is-info"
+        :disabled="!hasSelected"
+        @click="editListingActive = true"
+        class="button"
+      >
+        Edit Listings
+      </b-button>
+    </b-tooltip>
     <b-button
       type="is-danger"
       v-if="hasChecked"
