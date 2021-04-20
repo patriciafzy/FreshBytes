@@ -48,4 +48,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cart {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+}
+</style>
