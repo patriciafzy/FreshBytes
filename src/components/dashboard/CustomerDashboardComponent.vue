@@ -27,30 +27,29 @@
       <div class="tile is-parent">
         <div class="tile is-child is-6 box">
           <h1 class="title is-5">Past 12 Months</h1>
-          <line-chart class="canvas"></line-chart>
+          <trends-chart class="canvas" />
         </div>
         <div class="tile is-child is-3 box">
           <h1 class="title is-5">Product Type</h1>
-          <doughnut-chart class="canvas"></doughnut-chart>
+          <product-type-chart class="canvas" />
         </div>
         <div class="tile is-child is-3 box">
           <h1 class="title is-5">Most Purchased Products</h1>
-          <bar-chart class="canvas"></bar-chart>
+          <most-purchased-products-chart class="canvas" />
         </div>
       </div>
       <div class="tile is-parent">
         <div class="tile is-child is-3 box">
           <h1 class="title is-5">Most Frequented Stores</h1>
-          <bar-2-chart class="canvas"></bar-2-chart>
+          <most-frequented-stores-chart class="canvas" />
         </div>
         <div class="tile is-child is-6 box">
           <h1 class="title is-5">Orders</h1>
-          <!-- <b-table :data="getOrders" :columns="columns" /> -->
           <orders-table-component />
         </div>
         <div class="tile is-child is-3 box">
           <h1 class="title is-5">Global Saved Waste</h1>
-          <doughnut-2-chart class="canvas"></doughnut-2-chart>
+          <global-saved-waste-chart class="canvas" />
         </div>
       </div>
     </div>
@@ -59,20 +58,20 @@
 
 <script>
 import { mapGetters } from "vuex";
-import BarChart from "./charts/BarChart";
-import DoughnutChart from "./charts/DoughnutChart";
-import LineChart from "./charts/LineChart";
-import Bar2Chart from "./charts/Bar2Chart";
-import Doughnut2Chart from "./charts/Doughnut2Chart";
+import MostPurchasedProductsChart from "./charts/customers/MostPurchasedProductsChart";
+import ProductTypeChart from "./charts/customers/ProductTypeChart";
+import TrendsChart from "./charts/customers/TrendsChart";
+import MostFrequentedStoresChart from "./charts/customers/MostFrequentedStoresChart";
+import GlobalSavedWasteChart from "./charts/customers/GlobalSavedWasteChart";
 import OrdersTableComponent from "@/components/utils/OrdersTableComponent";
 
 export default {
   components: {
-    BarChart,
-    DoughnutChart,
-    LineChart,
-    Bar2Chart,
-    Doughnut2Chart,
+    MostPurchasedProductsChart,
+    ProductTypeChart,
+    TrendsChart,
+    MostFrequentedStoresChart,
+    GlobalSavedWasteChart,
     OrdersTableComponent,
   },
   data: function () {

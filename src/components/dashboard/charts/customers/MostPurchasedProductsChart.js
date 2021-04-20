@@ -1,16 +1,18 @@
-import { Doughnut } from "vue-chartjs";
-import randColor from "./colors";
+import { Bar } from "vue-chartjs";
+import randColor from "../colors";
 
-const colors = randColor(2);
+const colors = randColor(3);
 
 export default {
-  extends: Doughnut,
+  extends: Bar,
   data: () => ({
     chartdata: {
-      labels: ["Waste", "Saved Waste"],
+      labels: ["Yukon Gold Potatoes", "Potato Salad", "Potato Ice Cream"],
       datasets: [
         {
-          data: [66, 34],
+          axis: "y",
+          label: "Products",
+          data: [55, 24, 20, 19],
           backgroundColor: colors,
         },
       ],
@@ -18,6 +20,7 @@ export default {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      indexAxis: "y",
     },
   }),
 

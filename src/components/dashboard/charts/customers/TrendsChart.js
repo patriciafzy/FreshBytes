@@ -1,6 +1,5 @@
 import { Line } from "vue-chartjs";
-
-import randColor from "./colors";
+import randColor from "../colors";
 
 const colors = randColor(3);
 

@@ -1,18 +1,17 @@
-import { Bar } from "vue-chartjs";
-import randColor from "./colors";
+import { HorizontalBar } from "vue-chartjs";
+import randColor from "../colors";
 
 const colors = randColor(3);
 
 export default {
-  extends: Bar,
+  extends: HorizontalBar,
   data: () => ({
     chartdata: {
-      labels: ["Yukon Gold Potatoes", "Potato Salad", "Potato Ice Cream"],
+      labels: ["Potato Farm", "7-11", "Fruity Bites"],
       datasets: [
         {
-          axis: "y",
-          label: "Products",
-          data: [55, 24, 20, 19],
+          label: "Stores",
+          data: [84, 23, 10],
           backgroundColor: colors,
         },
       ],
@@ -20,7 +19,6 @@ export default {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      indexAxis: "y",
     },
   }),
 

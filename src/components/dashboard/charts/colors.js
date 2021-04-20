@@ -23,7 +23,7 @@ const colors = [
 
 export default (length) => {
   let allowRepeats = false;
-  if (length < colors.length) allowRepeats = true;
+  if (length > colors.length) allowRepeats = true;
 
   const result = [];
   while (result.length != length) {

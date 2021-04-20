@@ -1,17 +1,16 @@
-import { HorizontalBar } from "vue-chartjs";
-import randColor from "./colors";
+import { Doughnut } from "vue-chartjs";
+import randColor from "../colors";
 
-const colors = randColor(3);
+const colors = randColor(2);
 
 export default {
-  extends: HorizontalBar,
+  extends: Doughnut,
   data: () => ({
     chartdata: {
-      labels: ["Potato Farm", "7-11", "Fruity Bites"],
+      labels: ["Waste", "Saved Waste"],
       datasets: [
         {
-          label: "Stores",
-          data: [84, 23, 10],
+          data: [66, 34],
           backgroundColor: colors,
         },
       ],
