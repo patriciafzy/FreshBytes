@@ -165,7 +165,7 @@
           class="button"
           @click="handleSubmit(submit)"
         >
-          Add Listing
+          Edit Listing
         </b-button>
       </validation-observer>
     </div>
@@ -221,12 +221,14 @@ export default {
   },
   methods: {
     submit: async function () {
+      const loadingComponent = this.$buefy.loading.open();
       const files = this.$refs.pond.getFiles();
       const { hasNewImage, ...filterData } = this._data;
       console.log(hasNewImage);
       let itemData = {
         ...filterData,
         business: this.getUser.username,
+        points: Math.floor(this.weight * 10),
       };
 
       if (files.length != 0) {
@@ -247,6 +249,7 @@ export default {
       console.log(itemData);
 
       updateItem(itemData, this.originalData.id).then(() => {
+        loadingComponent.close();
         this.$emit("close");
       });
     },

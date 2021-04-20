@@ -4,16 +4,19 @@
     <transition name="fade">
       <router-view />
     </transition>
+    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import NavBarComponent from "@/components/utils/NavBarComponent";
+import Footer from "@/components/utils/Footer";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
     NavBarComponent,
+    "footer-component": Footer,
   },
   computed: {
     ...mapGetters(["isLoggedIn"]),
