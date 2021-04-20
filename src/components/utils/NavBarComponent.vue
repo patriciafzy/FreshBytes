@@ -18,14 +18,6 @@
         <b-icon pack="fas" icon="utensils" size="is-medium"> </b-icon>
         <span>Products</span>
       </b-navbar-item>
-      <b-navbar-item
-        tag="router-link"
-        :to="{ name: 'listings' }"
-        v-if="!isCustomer"
-      >
-        <b-icon pack="fas" icon="clipboard-list" size="is-medium"> </b-icon>
-        <span>Listings</span>
-      </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
         <b-icon pack="fas" icon="user" size="is-medium"> </b-icon>
         <span>Profile</span>
