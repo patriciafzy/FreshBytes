@@ -165,7 +165,7 @@
           class="button"
           @click="handleSubmit(submit)"
         >
-          Add Listing
+          Edit Listing
         </b-button>
       </validation-observer>
     </div>
